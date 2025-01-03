@@ -1,9 +1,34 @@
-import { MotionWrapper } from '../../components/motion-wrapper';
-// ... other imports
+import { MotionWrapper } from "@/components/motion-wrapper"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function About() {
-  // ... other code
+const values = [
+  {
+    title: "Innovation",
+    description: "We constantly strive to push boundaries and create cutting-edge solutions.",
+  },
+  {
+    title: "Collaboration",
+    description: "We believe in the power of teamwork and fostering strong partnerships.",
+  },
+  {
+    title: "Integrity",
+    description: "We uphold the highest standards of honesty and ethical behavior in all we do.",
+  },
+  {
+    title: "Excellence",
+    description: "We are committed to delivering top-quality results in every aspect of our work.",
+  },
+  {
+    title: "Customer-Centric",
+    description: "Our customers' success and satisfaction are at the heart of everything we do.",
+  },
+  {
+    title: "Sustainability",
+    description: "We are dedicated to making a positive impact on our environment and communities.",
+  },
+]
 
+export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-16">
       <h1 className="text-4xl font-bold mb-8">About Us</h1>
@@ -12,18 +37,21 @@ export default function About() {
           <MotionWrapper
             key={value.title}
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="relative p-6 rounded-2xl bg-white/5"
           >
-            <h3 className="text-2xl font-light tracking-tight mb-4">
-              {value.title}
-            </h3>
-            <p className="text-gray-400">{value.description}</p>
+            <Card>
+              <CardHeader>
+                <CardTitle>{value.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>{value.description}</p>
+              </CardContent>
+            </Card>
           </MotionWrapper>
         ))}
       </div>
     </div>
-  );
+  )
 }
 
