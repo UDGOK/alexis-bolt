@@ -1,15 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  images: {
+    domains: ['images.unsplash.com'],
+  },
 }
 
 module.exports = nextConfig
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
-  },
-};
-
-module.exports = nextConfig;
