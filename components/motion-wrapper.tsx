@@ -1,32 +1,17 @@
-'use client'
+import { motion } from 'framer-motion';
+import React from 'react';
 
-import React, { useEffect, useState } from 'react'
-import { motion, HTMLMotionProps, MotionProps } from 'framer-motion'
-
-type MotionComponent = React.ComponentType<HTMLMotionProps<any>>
-
-interface MotionWrapperProps extends MotionProps {
-  children: React.ReactNode
-  motionTag?: keyof JSX.IntrinsicElements
+export interface MotionWrapperProps {
+  children: React.ReactNode;
+  className?: string; // Add className to the props
+  [key: string]: any; // Allow any additional props
 }
 
-export const MotionWrapper: React.FC<MotionWrapperProps> = ({ children, motionTag = 'div', ...props }) => {
-  const [MotionComponent, setMotionComponent] = useState<MotionComponent | null>(null)
+export const MotionWrapper: React.FC<MotionWrapperProps> = ({ children, className, ...props }) => {
+  return (
+    <motion.div className={className} {...props}>
+      {children}
+    </motion.div>
+  );
+};
 
-  useEffect(() => {
-    const importMotion = async () => {
-      const framerMotion = await import('framer-motion')
-      setMotionComponent(() => framerMotion.motion[motionTag as keyof typeof framerMotion.motion])
-    }
-    importMotion()
-  }, [motionTag])
-
-  if (!MotionComponent) {
-    const FallbackComponent = motionTag as keyof JSX.IntrinsicElements
-    // Filter out motion-specific props for the fallback
-    const { whileHover, whileTap, whileInView, ...domProps } = props
-    return <FallbackComponent {...domProps}>{children}</FallbackComponent>
-  }
-
-  return <MotionComponent {...props}>{children}</MotionComponent>
-}
