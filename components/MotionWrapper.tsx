@@ -37,14 +37,14 @@ export const MotionWrapper: React.FC<MotionWrapperProps> = ({
     const importMotion = async () => {
       const framerMotion = await import('framer-motion')
       // Explicitly cast the motion component to MotionComponent
-      const component = framerMotion.motion[motiontag as keyof typeof framerMotion.motion] as MotionComponent
+      const component = framerMotion.motion[motionTag as keyof typeof framerMotion.motion] as MotionComponent
       setMotionComponent(component)
     }
     importMotion()
   }, [motionTag])
 
   if (!MotionComponent) {
-    const FallbackComponent = motiontag as keyof JSX.IntrinsicElements
+    const FallbackComponent = motionTag as keyof JSX.IntrinsicElements
     // Filter out framer-motion-specific props that are not applicable to the fallback component
     const { 
       whileHover, 
