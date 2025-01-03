@@ -22,7 +22,7 @@ export default function Home() {
       <div ref={heroRef} className="h-screen relative flex items-center justify-center overflow-hidden">
         <MotionWrapper
           motionTag="div"
-          style={{ scale }}
+          scale={scale} // Pass scale directly as a motion prop
           className="absolute inset-0 z-0"
         >
           <Image
@@ -36,7 +36,7 @@ export default function Home() {
         </MotionWrapper>
         <MotionWrapper
           motionTag="h1"
-          style={{ opacity }}
+          opacity={opacity} // Pass opacity directly as a motion prop
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -55,7 +55,7 @@ export default function Home() {
                 Premium Concrete Solutions in Tulsa
               </h2>
               <p className="text-xl font-light text-white/70">
-              Looking for top-notch concrete services in Tulsa? We specialize in premium concrete solutions, including driveways, patios, foundations, and more. With years of experience and a commitment to quality, we deliver durable, beautiful results tailored to your needs. Whether it’s residential or commercial, trust us to bring your vision to life. Contact us today for reliable, affordable concrete services in Tulsa, OK!
+                Looking for top-notch concrete services in Tulsa? We specialize in premium concrete solutions, including driveways, patios, foundations, and more. With years of experience and a commitment to quality, we deliver durable, beautiful results tailored to your needs. Whether it’s residential or commercial, trust us to bring your vision to life. Contact us today for reliable, affordable concrete services in Tulsa, OK!
               </p>
             </div>
             <MotionWrapper
