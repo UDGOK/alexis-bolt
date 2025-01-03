@@ -5,11 +5,15 @@ import { motion, HTMLMotionProps, MotionProps } from 'framer-motion'
 
 type MotionComponent = React.ComponentType<HTMLMotionProps<any>>
 
-interface MotionWrapperProps extends MotionProps {
+type CombinedStyle = React.CSSProperties & {
+  [key: string]: any
+}
+
+interface MotionWrapperProps extends Omit<MotionProps, 'style'> {
   children: React.ReactNode
   motionTag?: keyof JSX.IntrinsicElements
-  className?: string  // Add className prop
-  style?: React.CSSProperties  // Add style prop
+  className?: string
+  style?: CombinedStyle
 }
 
 export const MotionWrapper: React.FC<MotionWrapperProps> = ({ 
@@ -31,12 +35,11 @@ export const MotionWrapper: React.FC<MotionWrapperProps> = ({
 
   if (!MotionComponent) {
     const FallbackComponent = motionTag as keyof JSX.IntrinsicElements
-    // Filter out motion-specific props for the fallback
     const { whileHover, whileTap, whileInView, ...domProps } = props
     return (
       <FallbackComponent 
         className={className}
-        style={style}
+        style={style as React.CSSProperties}
         {...domProps}
       >
         {children}
