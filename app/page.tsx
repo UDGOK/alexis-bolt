@@ -42,7 +42,7 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="text-[180px] font-extralight tracking-[-0.02em] text-center z-10 max-w-7xl mx-auto px-6 leading-[0.9] md:leading-[0.85]"
         >
-          Building Excellence
+          Alexis Concrete & Asphalt
         </MotionWrapper>
       </div>
 
@@ -52,10 +52,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <h2 className="text-4xl md:text-6xl font-light tracking-tight">
-                Premium Concrete Solutions
+                Premium Concrete Solutions in Tulsa
               </h2>
               <p className="text-xl font-light text-white/70">
-                Our commitment to quality begins with selecting the finest materials and implementing cutting-edge techniques.
+              Looking for top-notch concrete services in Tulsa? We specialize in premium concrete solutions, including driveways, patios, foundations, and more. With years of experience and a commitment to quality, we deliver durable, beautiful results tailored to your needs. Whether it’s residential or commercial, trust us to bring your vision to life. Contact us today for reliable, affordable concrete services in Tulsa, OK!
               </p>
             </div>
             <MotionWrapper
@@ -97,7 +97,7 @@ export default function Home() {
                 Site Preparation & Excavation
               </h2>
               <p className="text-xl font-light text-white/70">
-                From initial groundwork to final grading, our fleet of modern equipment and skilled operators ensure your project starts with a solid foundation.
+                From initial groundwork to final grading, our fleet of modern equipment and skilled operators ensure your project starts with a solid foundation. Start your project on the right foundation with our professional site preparation and excavation services in Tulsa, OK. From land clearing to grading and leveling, we ensure your site is ready for construction with precision and care. Our experienced team uses advanced equipment to handle projects of all sizes, delivering efficient and reliable results. Trust us to prepare your site for success—contact us today for a free consultation!
               </p>
             </div>
           </div>

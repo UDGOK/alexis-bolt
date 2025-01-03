@@ -1,0 +1,27 @@
+{
+  "node": {
+    "405e98f732ba793ee7f6e704049227ebf182a55d00": {
+      "workers": {
+        "app/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CGitHub%5C%5Calexis-bolt%5C%5Capp%5C%5Cactions.ts%22%2C%5B%5B%22405e98f732ba793ee7f6e704049227ebf182a55d00%22%2C%22subscribeToNewsletter%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/services/asphalt/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CGitHub%5C%5Calexis-bolt%5C%5Capp%5C%5Cactions.ts%22%2C%5B%5B%22405e98f732ba793ee7f6e704049227ebf182a55d00%22%2C%22subscribeToNewsletter%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/_not-found/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CGitHub%5C%5Calexis-bolt%5C%5Capp%5C%5Cactions.ts%22%2C%5B%5B%22405e98f732ba793ee7f6e704049227ebf182a55d00%22%2C%22subscribeToNewsletter%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/page": "action-browser",
+        "app/services/asphalt/page": "action-browser",
+        "app/_not-found/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "S4fOt5QbHnGC9g3jppWnME3kD1/bu3upR9Jes/6iGaE="
+}

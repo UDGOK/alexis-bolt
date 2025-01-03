@@ -1,17 +1,27 @@
-import { motion } from 'framer-motion';
-import React from 'react';
+"use client";
 
-export interface MotionWrapperProps {
+import { motion } from "framer-motion";
+import React from "react";
+
+interface MotionWrapperProps {
   children: React.ReactNode;
-  className?: string; // Add className to the props
-  [key: string]: any; // Allow any additional props
+  className?: string;
+  [key: string]: any; // for other motion props
 }
 
-export const MotionWrapper: React.FC<MotionWrapperProps> = ({ children, className, ...props }) => {
+export const MotionWrapper: React.FC<MotionWrapperProps> = ({ 
+  children, 
+  className = "", 
+  ...props 
+}) => {
   return (
-    <motion.div className={className} {...props}>
+    <motion.div 
+      className={className} 
+      {...props}
+    >
       {children}
     </motion.div>
   );
 };
 
+export default MotionWrapper;
