@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { motion, HTMLMotionProps, MotionProps } from 'framer-motion'
+import { motion, HTMLMotionProps, MotionProps, MotionValue } from 'framer-motion'
 
 type MotionComponent = React.ComponentType<HTMLMotionProps<any>>
 
@@ -14,6 +14,11 @@ interface MotionWrapperProps extends Omit<MotionProps, 'style'> {
   motionTag?: keyof JSX.IntrinsicElements
   className?: string
   style?: CombinedStyle
+  scale?: MotionValue<number> | number // Add scale to the interface
+  opacity?: MotionValue<number> | number // Add opacity to the interface
+  href?: string // Add href to the interface
+  // Allow any additional props to be passed
+  [key: string]: any
 }
 
 export const MotionWrapper: React.FC<MotionWrapperProps> = ({ 
@@ -21,37 +26,60 @@ export const MotionWrapper: React.FC<MotionWrapperProps> = ({
   motionTag = 'div', 
   className,
   style,
-  ...props 
+  scale, // Destructure scale
+  opacity, // Destructure opacity
+  href, // Destructure href
+  ...props // Forward all other props
 }) => {
   const [MotionComponent, setMotionComponent] = useState<MotionComponent | null>(null)
 
   useEffect(() => {
     const importMotion = async () => {
       const framerMotion = await import('framer-motion')
-      setMotionComponent(() => framerMotion.motion[motionTag as keyof typeof framerMotion.motion])
+      // Explicitly cast the motion component to MotionComponent
+      const component = framerMotion.motion[motionTag as keyof typeof framerMotion.motion] as MotionComponent
+      setMotionComponent(component)
     }
     importMotion()
   }, [motionTag])
 
   if (!MotionComponent) {
     const FallbackComponent = motionTag as keyof JSX.IntrinsicElements
-    const { whileHover, whileTap, whileInView, ...domProps } = props
+    // Filter out framer-motion-specific props that are not applicable to the fallback component
+    const { 
+      whileHover, 
+      whileTap, 
+      whileInView, 
+      onDrag, 
+      onDragStart, 
+      onDragEnd, 
+      onAnimationStart, 
+      onAnimationComplete, 
+      ...domProps 
+    } = props
     return (
       <FallbackComponent 
         className={className}
         style={style as React.CSSProperties}
-        {...domProps}
+        href={href} // Pass href to the fallback component
+        {...domProps} // Forward all additional props to the DOM element
       >
         {children}
       </FallbackComponent>
     )
   }
 
+  // Destructure motionTag from props to avoid passing it to the DOM element
+  const { motionTag: _, ...restProps } = props;
+
   return (
     <MotionComponent 
       className={className}
       style={style}
-      {...props}
+      scale={scale} // Pass scale directly as a motion prop
+      opacity={opacity} // Pass opacity directly as a motion prop
+      href={href} // Pass href to the motion component
+      {...restProps} // Forward all additional props to the motion component
     >
       {children}
     </MotionComponent>
