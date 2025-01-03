@@ -1,11 +1,11 @@
-import { MotionWrapper } from "@/components/motion-wrapper"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { MotionWrapper } from "@/components/motion-wrapper";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // Define the type for our values
 type ValueItem = {
   title: string;
   description: string;
-}
+};
 
 // Define the values array as a constant
 const VALUES: ValueItem[] = [
@@ -36,11 +36,12 @@ const VALUES: ValueItem[] = [
 ];
 
 export default function AboutPage() {
+  console.log(VALUES); // Debugging step
   return (
     <div className="container mx-auto px-4 py-16">
       <h1 className="text-4xl font-bold mb-8">About Us</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {VALUES.map((value, index) => (  // Changed from values to VALUES
+        {VALUES.map((value, index) => (
           <MotionWrapper
             key={value.title}
             initial={{ opacity: 0, y: 20 }}
@@ -59,5 +60,5 @@ export default function AboutPage() {
         ))}
       </div>
     </div>
-  )
+  );
 }
