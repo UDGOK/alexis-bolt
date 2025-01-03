@@ -1,8 +1,14 @@
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-// Export the values array as a constant
-export const VALUES = [
+// Define the type for our values
+type ValueItem = {
+  title: string;
+  description: string;
+}
+
+// Define the values array as a constant
+const VALUES: ValueItem[] = [
   {
     title: "Innovation",
     description: "We constantly strive to push boundaries and create cutting-edge solutions.",
@@ -27,7 +33,7 @@ export const VALUES = [
     title: "Sustainability",
     description: "We are dedicated to making a positive impact on our environment and communities.",
   },
-] as const
+];
 
 export default function AboutPage() {
   return (
