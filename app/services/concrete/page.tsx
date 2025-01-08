@@ -58,7 +58,7 @@ export default function ConcreteServicesPage() {
               >
                 <div className="aspect-[4/3] mb-6 overflow-hidden rounded-lg">
                   <Image
-                    src={`/placeholder.webp?height=600&width=800&text=${encodeURIComponent(feature.title)}`}
+                    src={feature.image || `/placeholder.webp?height=600&width=800&text=${encodeURIComponent(feature.title)}`}
                     alt={feature.title}
                     width={800}
                     height={600}
@@ -77,7 +77,7 @@ export default function ConcreteServicesPage() {
       <section className="relative h-[50vh] md:h-[80vh] overflow-hidden">
         <motion.div style={{ y: y2 }} className="absolute inset-0">
           <Image
-            src="/placeholder.webp?height=1080&width=1920&text=Concrete%20Excellence"
+            src="https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/alexis-beautiful-tulsa-oklahoma.jpeg"
             alt="Concrete project"
             fill
             className="object-cover"
@@ -110,7 +110,7 @@ export default function ConcreteServicesPage() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y3 }} className="absolute inset-0 z-0">
           <Image
-            src="/placeholder.webp?height=1080&width=1920&text=Start%20Your%20Project"
+            src="https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/tulsa-concrete-projects.jpeg"
             alt="Concrete project completion"
             fill
             className="object-cover"
@@ -140,17 +140,21 @@ const features = [
   {
     title: "Commercial Concrete",
     description: "Tailored solutions for businesses, from foundations to decorative finishes.",
+    image: "https://raw.githubusercontent.com/UDGOK/alexis-bolt/006711bbf610d8d1b0d098a0873b242fafcc679f/public/images/alexis-commercial-concrete%201.jpeg"
   },
   {
     title: "Residential Concrete",
     description: "Enhance your home with our expert residential concrete services.",
+    image: "https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/alexis-residential-concrete%201.jpeg"
   },
   {
     title: "Industrial Flooring",
     description: "Durable and high-performance concrete flooring for industrial spaces.",
+    image: "https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/alexis-industriall-concrete%201.jpeg"
   },
   {
     title: "Decorative Concrete",
     description: "Artistic and aesthetically pleasing concrete designs for any project.",
+    image: "https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/alexis-pool-concrete%201.jpeg"
   },
 ]
