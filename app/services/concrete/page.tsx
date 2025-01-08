@@ -22,7 +22,7 @@ export default function ConcreteServicesPage() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y1 }} className="absolute inset-0 z-0">
           <Image
-            src="/placeholder.webp?height=1080&width=1920"
+            src="/images/alexis-concrete-footings3.jpg"
             alt="Concrete pouring"
             fill
             className="object-cover"

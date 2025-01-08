@@ -31,10 +31,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/media-kit/page.js"
     ],
-    "/_not-found/page": [
+    "/services/concrete/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/services/concrete/page.js"
     ]
   }
 }
