@@ -40,7 +40,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-[180px] font-extralight tracking-[-0.02em] text-center z-10 max-w-7xl mx-auto px-6 leading-[0.9] md:leading-[0.85]"
+          className="text-[clamp(48px,12vw,180px)] font-extralight tracking-[-0.02em] text-center z-10 max-w-7xl mx-auto px-6 leading-[0.9] md:leading-[0.85]"
         >
           Alexis Concrete & Asphalt
         </MotionWrapper>

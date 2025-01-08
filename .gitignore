@@ -1,1 +1,19 @@
-node_modules
+# Dependencies
+node_modules/
+.next/
+out/
+dist/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local development
+.env*.local
+.vercel
+
+# System files
+.DS_Store
+Thumbs.db
