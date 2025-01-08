@@ -3,8 +3,8 @@
 import { useRef } from 'react'
 import { useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
-import { ScrollSection } from '@/components/ScrollSection'
-import { MotionWrapper } from '@/components/MotionWrapper'
+import { ScrollSection } from '../components/ScrollSection'
+import { MotionWrapper } from '../components/MotionWrapper'
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null)
@@ -55,7 +55,7 @@ export default function Home() {
                 Premium Concrete Solutions in Tulsa
               </h2>
               <p className="text-xl font-light text-white/70">
-                Looking for top-notch concrete services in Tulsa? We specialize in premium concrete solutions, including driveways, patios, foundations, and more. With years of experience and a commitment to quality, we deliver durable, beautiful results tailored to your needs. Whether it’s residential or commercial, trust us to bring your vision to life. Contact us today for reliable, affordable concrete services in Tulsa, OK!
+                Looking for top-notch concrete services in Tulsa? We specialize in premium concrete solutions, including driveways, patios, foundations, and more. With years of experience and a commitment to quality, we deliver durable, beautiful results tailored to your needs. Whether it's residential or commercial, trust us to bring your vision to life. Contact us today for reliable, affordable concrete services in Tulsa, OK!
               </p>
             </div>
             <MotionWrapper
