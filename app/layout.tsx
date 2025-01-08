@@ -1,8 +1,8 @@
 import './globals.css'
 import { font } from './fonts'
-import { Navigation } from '@/components/navigation'
-import { Footer } from '@/components/footer'
-import { AnnouncementBanner } from '@/components/announcement-banner'
+import { Navigation } from "../components/navigation"
+import { Footer } from "../components/footer"
+import { AnnouncementBanner } from "../components/announcement-banner"
 import { validateEnv } from './lib/env'
 
 export const metadata = {

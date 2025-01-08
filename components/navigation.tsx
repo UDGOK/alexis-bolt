@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { MotionWrapper } from './motion-wrapper'
 import { Menu, X } from 'lucide-react'
@@ -85,8 +86,15 @@ export function Navigation() {
     >
       <nav className="max-w-[1400px] mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className={`text-2xl font-light tracking-tight ${isLightBackground && !isScrolled && !isMobileMenuOpen ? 'text-black' : 'text-white'}`}>
-            A C & A
+          <Link href="/" className={`relative h-12 w-32 ${isLightBackground && !isScrolled && !isMobileMenuOpen ? 'text-black' : 'text-white'}`}>
+            <div className="relative h-12 w-32">
+              <Image
+                src="/images/alexis-logo-small.png"
+                alt="Alexis Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
           </Link>
 
           {/* Desktop Menu */}
@@ -166,10 +174,15 @@ export function Navigation() {
                 <div className="flex items-center justify-between p-6 pt-8">
                   <Link 
                     href="/" 
-                    className="text-2xl font-light tracking-tight text-white"
+                    className="relative h-12 w-32 text-white"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    A C & A
+                    <Image
+                      src="/images/alexis-logo-small.png"
+                      alt="Alexis Logo"
+                      fill
+                      className="object-contain"
+                    />
                   </Link>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
