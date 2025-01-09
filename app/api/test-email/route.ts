@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import { getEnvVar } from '@/app/lib/env'
+import { getEnvVar } from 'app/lib/env'
 
 // Define interface for email response
 interface EmailResponse {

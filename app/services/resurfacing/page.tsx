@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { MotionWrapper } from '@/components/motion-wrapper'
+import { MotionWrapper } from "components/MotionWrapper"
 import Head from 'next/head'
 
 export default function ResurfacingPage() {

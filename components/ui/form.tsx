@@ -1,26 +1,24 @@
 "use client"
 
 import * as React from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
-import { Slot } from "@radix-ui/react-slot"
 import {
-  Controller,
-  ControllerProps,
-  FieldPath,
+  useForm,
+  SubmitHandler,
+  UseFormReturn,
   FieldValues,
   FormProvider,
   useFormContext,
 } from "react-hook-form"
 
-import { cn } from "@/lib/utils"
-import { Label } from "@/components/ui/label"
+import { cn } from "lib/utils"
+import { Label } from "components/ui/label"
 
 const Form = FormProvider
 
-type FormFieldContextValue<
+interface FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
-> = {
+  TName extends keyof TFieldValues = keyof TFieldValues
+> {
   name: TName
 }
 
@@ -30,33 +28,46 @@ const FormFieldContext = React.createContext<FormFieldContextValue>(
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends keyof TFieldValues = keyof TFieldValues
 >({
   ...props
-}: ControllerProps<TFieldValues, TName>) => {
+}: {
+  name: TName
+  children: React.ReactNode
+}) => {
   return (
-    <FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
+    <FormFieldContext.Provider value={{ name: String(props.name) }}>
+      {props.children}
     </FormFieldContext.Provider>
   )
 }
 
-const useFormField = () => {
+interface UseFormFieldReturn {
+  name: string
+  formItemId: string
+  formDescriptionId: string
+  formMessageId: string
+  invalid: boolean
+  isDirty: boolean
+  isTouched: boolean
+  isValidating: boolean
+  error?: { message?: string }
+}
+
+const useFormField = (): UseFormFieldReturn => {
   const fieldContext = React.useContext(FormFieldContext)
-  const itemContext = React.useContext(FormItemContext)
   const { getFieldState, formState } = useFormContext()
 
-  const fieldState = getFieldState(fieldContext.name, formState)
+  const fieldState = getFieldState(fieldContext.name as string, formState)
 
   if (!fieldContext) {
     throw new Error("useFormField should be used within <FormField>")
   }
 
-  const { id } = itemContext
+  const id = React.useId()
 
   return {
-    id,
-    name: fieldContext.name,
+    name: fieldContext.name as string,
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
@@ -64,31 +75,23 @@ const useFormField = () => {
   }
 }
 
-type FormItemContextValue = {
-  id: string
-}
-
-const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
-)
-
 const FormItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const id = React.useId()
-
   return (
-    <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
-    </FormItemContext.Provider>
+    <div
+      ref={ref}
+      className={cn("space-y-2", className)}
+      {...props}
+    />
   )
 })
 FormItem.displayName = "FormItem"
 
 const FormLabel = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
+  HTMLLabelElement,
+  React.LabelHTMLAttributes<HTMLLabelElement>
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField()
 
@@ -104,20 +107,15 @@ const FormLabel = React.forwardRef<
 FormLabel.displayName = "FormLabel"
 
 const FormControl = React.forwardRef<
-  React.ElementRef<typeof Slot>,
-  React.ComponentPropsWithoutRef<typeof Slot>
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
 >(({ ...props }, ref) => {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
+  const { error, formItemId } = useFormField()
 
   return (
-    <Slot
+    <div
       ref={ref}
       id={formItemId}
-      aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
-      }
       aria-invalid={!!error}
       {...props}
     />

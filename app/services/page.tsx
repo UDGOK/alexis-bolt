@@ -1,6 +1,6 @@
 'use client'
 
-import { MotionWrapper } from '@/components/motion-wrapper'
+import { MotionWrapper } from "components/MotionWrapper"
 
 export default function ServicesPage() {
   return (

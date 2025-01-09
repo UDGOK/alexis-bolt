@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { MotionWrapper } from '@/components/motion-wrapper'
+import { MotionWrapper } from "components/MotionWrapper"
 
 export default function ConcreteServicesPage() {
   const containerRef = useRef<HTMLDivElement>(null)

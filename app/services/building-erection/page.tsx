@@ -1,4 +1,4 @@
-import { MotionWrapper } from '@/components/motion-wrapper'
+import { MotionWrapper } from "components/MotionWrapper"
 
 export default function BuildingErectionPage() {
   return (

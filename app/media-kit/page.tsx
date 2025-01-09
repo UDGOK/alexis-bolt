@@ -2,7 +2,7 @@
 
 import { ArrowDown } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { MotionWrapper } from '@/components/motion-wrapper'
+import { MotionWrapper } from "components/MotionWrapper"
 
 interface Asset {
   title: string
