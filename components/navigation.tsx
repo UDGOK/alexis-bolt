@@ -35,6 +35,10 @@ const menuItems = [
       { name: 'Newsletter', href: '/newsletter' },
     ],
   },
+  {
+    name: 'Contact Us',
+    href: '/contact',
+  },
 ]
 
 export function Navigation() {
@@ -106,41 +110,56 @@ export function Navigation() {
                 onMouseEnter={() => handleMouseEnter(item.name)}
                 onMouseLeave={handleMouseLeave}
               >
-                <button
-                  className={`text-sm font-light tracking-tight ${
-                    isLightBackground && !isScrolled && !isMobileMenuOpen
-                      ? 'text-black/70 hover:text-black'
-                      : 'text-white/70 hover:text-white'
-                  } transition-colors`}
-                >
-                  {item.name}
-                </button>
-                <MotionWrapper
-                  motionTag="div"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ 
-                    opacity: activeMenu === item.name ? 1 : 0,
-                    y: activeMenu === item.name ? 0 : 10 
-                  }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute left-0 top-full pt-2"
-                >
-                  {activeMenu === item.name && (
-                    <div className="bg-black py-4 min-w-[180px] flex flex-col gap-3">
-                      {item.items.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          href={subItem.href}
-                          className={`px-4 text-sm font-light tracking-tight text-white/40 hover:text-white transition-colors ${
-                            pathname === subItem.href ? 'text-white' : ''
-                          }`}
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </MotionWrapper>
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className={`text-sm font-light tracking-tight ${
+                      isLightBackground && !isScrolled && !isMobileMenuOpen
+                        ? 'text-black/70 hover:text-black'
+                        : 'text-white/70 hover:text-white'
+                    } transition-colors`}
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <>
+                    <button
+                      className={`text-sm font-light tracking-tight ${
+                        isLightBackground && !isScrolled && !isMobileMenuOpen
+                          ? 'text-black/70 hover:text-black'
+                          : 'text-white/70 hover:text-white'
+                      } transition-colors`}
+                    >
+                      {item.name}
+                    </button>
+                    <MotionWrapper
+                      motionTag="div"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ 
+                        opacity: activeMenu === item.name ? 1 : 0,
+                        y: activeMenu === item.name ? 0 : 10 
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-0 top-full pt-2"
+                    >
+                      {activeMenu === item.name && item.items && (
+                        <div className="bg-black py-4 min-w-[180px] flex flex-col gap-3">
+                          {item.items.map((subItem) => (
+                            <Link
+                              key={subItem.name}
+                              href={subItem.href}
+                              className={`px-4 text-sm font-light tracking-tight text-white/40 hover:text-white transition-colors ${
+                                pathname === subItem.href ? 'text-white' : ''
+                              }`}
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </MotionWrapper>
+                  </>
+                )}
               </div>
             ))}
           </div>
@@ -202,31 +221,45 @@ export function Navigation() {
                 >
                   {menuItems.map((item) => (
                     <div key={item.name} className="mb-8">
-                      <button
-                        className="text-2xl font-extralight tracking-tight mb-6 text-white/70 hover:text-white transition-colors"
-                        onClick={() => setActiveMenu(activeMenu === item.name ? null : item.name)}
-                      >
-                        {item.name}
-                      </button>
-                      <motion.div
-                        initial={{ height: 0 }}
-                        animate={{ height: activeMenu === item.name ? 'auto' : 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="flex flex-col gap-4 pl-4">
-                          {item.items.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="text-lg font-extralight tracking-tight text-white/40 hover:text-white transition-colors"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              {subItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
+                      {item.href ? (
+                        <Link
+                          href={item.href}
+                          className="text-2xl font-extralight tracking-tight mb-6 text-white/70 hover:text-white transition-colors"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                      ) : (
+                        <>
+                          <button
+                            className="text-2xl font-extralight tracking-tight mb-6 text-white/70 hover:text-white transition-colors"
+                            onClick={() => setActiveMenu(activeMenu === item.name ? null : item.name)}
+                          >
+                            {item.name}
+                          </button>
+                          <motion.div
+                            initial={{ height: 0 }}
+                            animate={{ height: activeMenu === item.name ? 'auto' : 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                          >
+                            {item.items && (
+                              <div className="flex flex-col gap-4 pl-4">
+                                {item.items.map((subItem) => (
+                                  <Link
+                                    key={subItem.name}
+                                    href={subItem.href}
+                                    className="text-lg font-extralight tracking-tight text-white/40 hover:text-white transition-colors"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                  >
+                                    {subItem.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </motion.div>
+                        </>
+                      )}
                     </div>
                   ))}
                 </motion.div>

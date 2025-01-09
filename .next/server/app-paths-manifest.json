@@ -1,3 +1,5 @@
 {
-  "/services/concrete/page": "app/services/concrete/page.js"
+  "/api/contact/route": "app/api/contact/route.js",
+  "/page": "app/page.js",
+  "/contact/page": "app/contact/page.js"
 }
