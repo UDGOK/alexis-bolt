@@ -1,5 +1,18 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/api/contact/route": "app/api/contact/route.js",
+  "/api/daily-summary/route": "app/api/daily-summary/route.js",
+  "/api/test-email/route": "app/api/test-email/route.js",
+  "/api/test-resend/route": "app/api/test-resend/route.js",
+  "/media-kit/page": "app/media-kit/page.js",
+  "/about/page": "app/about/page.js",
+  "/contact/page": "app/contact/page.js",
   "/page": "app/page.js",
-  "/contact/page": "app/contact/page.js"
+  "/services/concrete/page": "app/services/concrete/page.js",
+  "/services/asphalt/page": "app/services/asphalt/page.js",
+  "/services/building-erection/page": "app/services/building-erection/page.js",
+  "/projects/page": "app/projects/page.js",
+  "/services/resurfacing/page": "app/services/resurfacing/page.js",
+  "/services/page": "app/services/page.js",
+  "/terms/page": "app/terms/page.js"
 }
