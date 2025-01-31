@@ -172,7 +172,7 @@ export function Navigation() {
 
           {/* Mobile Menu Button */}
           <button
-            className={`md:hidden ${
+            className={`md:hidden p-2 ${
               isScrolled || isMobileMenuOpen
                 ? 'text-primary-foreground hover:text-primary-foreground'
                 : 'text-secondary hover:text-secondary'
@@ -180,7 +180,7 @@ export function Navigation() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-8 w-8" />
           </button>
         </div>
 
