@@ -207,6 +207,7 @@ export function Navigation() {
                       alt="Alexis Logo"
                       fill
                       className="object-contain"
+                      style={{ filter: 'brightness(0) invert(1)' }}
                     />
                   </Link>
                   <button
