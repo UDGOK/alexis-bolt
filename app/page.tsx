@@ -20,14 +20,23 @@ export default function Home() {
     <main className="relative bg-background text-foreground">
       {/* Hero Section */}
       <div ref={heroRef} className="h-screen relative flex items-center justify-center overflow-hidden">
-        <video
-          src="/videos/projects-tulsa-1.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/alexis-concrete-splash.jpg"
+            alt="Concrete and Asphalt Services in Tulsa"
+            fill
+            className="object-cover"
+            priority
+          />
+          <video
+            src="/videos/projects-tulsa-1.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover hidden md:block"
+          />
+        </div>
         <div className="absolute inset-0 bg-black/50" />
         <MotionWrapper
           motionTag="div"
@@ -35,12 +44,12 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="z-10 text-center"
+          className="z-10 text-center px-4"
         >
-          <h1 className="text-[clamp(48px,8vw,120px)] font-extralight tracking-[-0.02em] text-primary-foreground leading-[0.9] md:leading-[0.85]">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extralight tracking-[-0.02em] text-primary-foreground leading-tight">
             Concrete & Asphalt<br />Experts in Tulsa
           </h1>
-          <p className="mt-4 text-xl font-light text-primary-foreground/80">
+          <p className="mt-4 text-lg md:text-xl font-light text-primary-foreground/80">
             Premier concrete and asphalt solutions for Tulsa and surrounding areas
           </p>
         </MotionWrapper>
@@ -196,7 +205,7 @@ export default function Home() {
               <p className="font-semibold text-orange-600">- Sarah T., Tulsa Homeowner</p>
             </div>
             <div className="bg-background p-6 rounded-lg shadow-lg">
-              <p className="text-lg font-light mb-4 text-orange-500">"As a business owner in Tulsa, I needed a reliable asphalt contractor for our parking lot renovation. Alexis delivered outstanding results, on time and within budget. Their asphalt sealing service has significantly extended the life of our pavement."</p>
+              <p className="text-lg font-light mb-4 text-orange-500">"As a business owner in Tulsa, I needed a reliable asphalt contractor for our parking lot renovation. Alexis delivered outstanding results on time and within budget. Their asphalt sealing service has significantly extended the life of our pavement."</p>
               <p className="font-semibold text-orange-600">- Mike R., Tulsa Business Owner</p>
             </div>
           </div>
