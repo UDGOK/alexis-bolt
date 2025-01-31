@@ -1,7 +1,7 @@
 import { list } from '@vercel/blob'
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import { getEnvVar } from "app/lib/env"
+import { getEnvVar } from '@/app/lib/env'
 
 // Define types for better type safety
 interface EmailResponse {

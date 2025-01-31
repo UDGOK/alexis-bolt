@@ -2,7 +2,7 @@
 
 import { ArrowDown } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { MotionWrapper } from "components/MotionWrapper"
+import { MotionWrapper } from '@components/motion-wrapper'
 
 interface Asset {
   title: string
@@ -16,28 +16,28 @@ const assets: Asset[] = [
   {
     title: "AC&A Logo",
     description: "Primary logo in various formats",
-    imageUrl: "/placeholder.webp?height=400&width=600",
+    imageUrl: "/images/alexis-logo-small.png",
     downloadUrl: "#",
     type: "ZIP"
   },
   {
     title: "Brand Guidelines",
     description: "Complete brand style guide",
-    imageUrl: "/placeholder.webp?height=400&width=600",
+    imageUrl: "/images/alexis-logo-small.png",
     downloadUrl: "#",
     type: "ZIP"
   },
   {
     title: "Project Photos",
     description: "High-resolution project images",
-    imageUrl: "/placeholder.webp?height=400&width=600",
+    imageUrl: "/images/alexis-logo-small.png",
     downloadUrl: "#",
     type: "ZIP"
   },
   {
     title: "Company Overview",
     description: "Detailed company information",
-    imageUrl: "/placeholder.webp?height=400&width=600",
+    imageUrl: "/images/alexis-logo-small.png",
     downloadUrl: "#",
     type: "PDF"
   }
@@ -45,14 +45,13 @@ const assets: Asset[] = [
 
 function AssetCard({ asset }: { asset: Asset }) {
   return (
-    <MotionWrapper
-      motionTag="div"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="group"
-    >
+    <div className="group">
+      <MotionWrapper
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
       <div className="aspect-[3/2] mb-8 overflow-hidden bg-black/5 rounded-sm">
         <img
           src={asset.imageUrl}
@@ -75,7 +74,8 @@ function AssetCard({ asset }: { asset: Asset }) {
           <ArrowDown className="w-5 h-5 transition-transform group-hover/button:-translate-y-0.5" />
         </motion.a>
       </div>
-    </MotionWrapper>
+      </MotionWrapper>
+    </div>
   )
 }
 
@@ -83,20 +83,20 @@ export default function MediaKitPage() {
   return (
     <main className="min-h-screen pt-[120px] pb-32 bg-white">
       <div className="max-w-[1400px] mx-auto px-6">
-        <MotionWrapper
-          motionTag="div"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-24"
-        >
+        <div className="mb-24">
+          <MotionWrapper
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
           <h1 className="text-[48px] leading-[1.1] font-light mb-6 text-black">
             Media Kit
           </h1>
           <p className="text-[16px] leading-[1.6] text-[#666666] max-w-[460px]">
             Download official AC&A logos, brand guidelines, and media assets for proper usage in publications and marketing materials.
           </p>
-        </MotionWrapper>
+          </MotionWrapper>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24">
           {assets.map((asset) => (
@@ -104,14 +104,13 @@ export default function MediaKitPage() {
           ))}
         </div>
 
-        <MotionWrapper
-          motionTag="div"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-32 max-w-[460px]"
-        >
+        <div className="mt-32 max-w-[460px]">
+          <MotionWrapper
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
           <h2 className="text-[16px] text-black mb-3 font-normal">Need something else?</h2>
           <p className="text-[14px] text-[#666666] mb-8">
             If you need additional materials or have specific requests, please don't hesitate to reach out to our team.
@@ -124,7 +123,8 @@ export default function MediaKitPage() {
           >
             Contact us
           </motion.a>
-        </MotionWrapper>
+          </MotionWrapper>
+        </div>
       </div>
     </main>
   )

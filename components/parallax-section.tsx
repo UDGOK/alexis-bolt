@@ -1,36 +1,41 @@
 'use client'
 
-import { useRef } from 'react'
-import { useScroll, useTransform } from 'framer-motion'
-import { MotionWrapper } from './motion-wrapper'
+import { useRef, useEffect } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 interface ParallaxSectionProps {
   children: React.ReactNode
-  offset?: number[]
+  bgImage: string
+  overlayColor?: string
 }
 
-export function ParallaxSection({ children, offset = [0, 1] }: ParallaxSectionProps) {
-  const ref = useRef<HTMLDivElement>(null)
+export function ParallaxSection({ children, bgImage, overlayColor = 'rgba(0, 0, 0, 0.5)' }: ParallaxSectionProps) {
+  const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"]
+    offset: ["start start", "end start"]
   })
 
-  const yValue = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
-  const opacityValue = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
 
   return (
-    <MotionWrapper
-      motionTag="div"
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      style={{ opacity: opacityValue }}
-      className="relative min-h-screen"
-    >
-      <MotionWrapper motionTag="div" style={{ y: yValue }}>
+    <section ref={ref} className="relative overflow-hidden min-h-screen flex items-center justify-center">
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          y
+        }}
+      />
+      <div
+        className="absolute inset-0 z-10"
+        style={{ backgroundColor: overlayColor }}
+      />
+      <div className="relative z-20 container mx-auto px-6">
         {children}
-      </MotionWrapper>
-    </MotionWrapper>
+      </div>
+    </section>
   )
 }

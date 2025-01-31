@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { subscribeToNewsletter } from 'app/actions'
+import { subscribeToNewsletter } from '@/app/actions'
 
 export function Footer() {
   const [email, setEmail] = useState('')
@@ -38,7 +38,7 @@ export function Footer() {
           <div className="space-y-4">
             <h2 className="text-[32px] leading-[1.1] font-light">
               Subscribe to the<br />
-              AC&A Newsletter
+              Newsletter
             </h2>
             <p className="text-[15px] leading-[1.4] text-[#666666] max-w-[280px]">
               Latest news, musings, announcements and updates direct to your inbox.
@@ -79,7 +79,7 @@ export function Footer() {
 
           {/* Logo Section */}
           <div className="text-2xl font-light lg:text-right">
-            A C & A
+            
           </div>
 
           {/* Links Section */}
@@ -117,17 +117,23 @@ export function Footer() {
             <div>
               <h3 className="text-[13px] text-[#666666] mb-4">Resources</h3>
               <div className="grid gap-[10px]">
-                <Link href="/support" className="text-[15px] text-[#999999] hover:text-white transition-colors">
-                  Support
+                <Link href="/resources/faq" className="text-[15px] text-[#999999] hover:text-white transition-colors">
+                  FAQ
                 </Link>
-                <Link href="/media-kit" className="text-[15px] text-[#999999] hover:text-white transition-colors">
-                  Media Kit
+                <Link href="/resources/technical" className="text-[15px] text-[#999999] hover:text-white transition-colors">
+                  Technical
                 </Link>
-                <Link href="/downloads" className="text-[15px] text-[#999999] hover:text-white transition-colors">
+                <Link href="/resources/downloads" className="text-[15px] text-[#999999] hover:text-white transition-colors">
                   Downloads
                 </Link>
-                <Link href="/newsletter" className="text-[15px] text-[#999999] hover:text-white transition-colors">
-                  Newsletter
+                <Link href="/resources/concrete-calculator" className="text-[15px] text-[#999999] hover:text-white transition-colors">
+                  Concrete Calculator
+                </Link>
+                <Link href="/resources/rebar-calculator" className="text-[15px] text-[#999999] hover:text-white transition-colors">
+                  Rebar Calculator
+                </Link>
+                <Link href="/resources/gravel-calculator" className="text-[15px] text-[#999999] hover:text-white transition-colors">
+                  Gravel Calculator
                 </Link>
               </div>
             </div>
@@ -151,8 +157,14 @@ export function Footer() {
 
         {/* Copyright Section */}
         <div className="mt-24 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <p className="text-[13px] text-[#666666]">Alexis Concrete and Asphalt Inc.</p>
-          <p className="text-[13px] text-[#666666]">All rights reserved.</p>
+          <p className="text-[13px] text-[#FF6600]">Alexis Concrete and Asphalt Inc.</p>
+          <div className="flex flex-col md:flex-row items-center gap-2">
+            <p className="text-[13px] text-[#FF6600]">Copyright 2025. All rights reserved.</p>
+            <span className="hidden md:inline text-[#FF6600]">|</span>
+            <Link href="/privacy" className="text-[13px] text-[#FF6600] hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

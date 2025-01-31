@@ -3,7 +3,9 @@
 import { useRef } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { MotionWrapper } from "components/MotionWrapper"
+import { MotionWrapper } from '@/components/motion-wrapper'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 export default function ConcreteServicesPage() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -22,8 +24,8 @@ export default function ConcreteServicesPage() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y1 }} className="absolute inset-0 z-0">
           <Image
-            src="/images/alexis-concrete-footings3.jpg"
-            alt="Concrete pouring"
+            src="/images/alexis-concrete-pours2.jpg"
+            alt="Workers pouring and smoothing fresh concrete"
             fill
             className="object-cover"
           />
@@ -34,7 +36,7 @@ export default function ConcreteServicesPage() {
             Concrete Services
           </h1>
           <p className="text-xl md:text-2xl font-light text-white/70 max-w-3xl mx-auto">
-            Delivering premium concrete solutions with precision and expertise
+            Delivering premium concrete solutions with precision and expertise in Tulsa and surrounding areas
           </p>
         </div>
       </section>
@@ -57,13 +59,15 @@ export default function ConcreteServicesPage() {
                 className="relative"
               >
                 <div className="aspect-[4/3] mb-6 overflow-hidden rounded-lg">
-                  <Image
-                    src={feature.image || `/placeholder.webp?height=600&width=800&text=${encodeURIComponent(feature.title)}`}
-                    alt={feature.title}
-                    width={800}
-                    height={600}
-                    className="object-cover w-full h-full"
-                  />
+                  <Zoom>
+                    <Image
+                      src={feature.image}
+                      alt={`${feature.title} work in progress`}
+                      width={800}
+                      height={600}
+                      className="object-cover w-full h-full"
+                    />
+                  </Zoom>
                 </div>
                 <h3 className="text-2xl font-light mb-4">{feature.title}</h3>
                 <p className="text-white/70 font-light">{feature.description}</p>
@@ -77,8 +81,8 @@ export default function ConcreteServicesPage() {
       <section className="relative h-[50vh] md:h-[80vh] overflow-hidden">
         <motion.div style={{ y: y2 }} className="absolute inset-0">
           <Image
-            src="https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/alexis-beautiful-tulsa-oklahoma.jpeg"
-            alt="Concrete project"
+            src="/images/alexis-concrete-footings.jpg"
+            alt="Large concrete structure under construction"
             fill
             className="object-cover"
           />
@@ -110,8 +114,8 @@ export default function ConcreteServicesPage() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y3 }} className="absolute inset-0 z-0">
           <Image
-            src="https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/tulsa-concrete-projects.jpeg"
-            alt="Concrete project completion"
+            src="/images/alexis-concrete-splash.jpg"
+            alt="Completed concrete structure with workers inspecting"
             fill
             className="object-cover"
           />
@@ -139,22 +143,37 @@ export default function ConcreteServicesPage() {
 const features = [
   {
     title: "Commercial Concrete",
-    description: "Tailored solutions for businesses, from foundations to decorative finishes.",
-    image: "https://raw.githubusercontent.com/UDGOK/alexis-bolt/006711bbf610d8d1b0d098a0873b242fafcc679f/public/images/alexis-commercial-concrete%201.jpeg"
+    description: "Tailored solutions for businesses in Tulsa, from foundations to decorative finishes.",
+    image: "/images/alexis-commercial-concrete 1.jpeg"
   },
   {
     title: "Residential Concrete",
-    description: "Enhance your home with our expert residential concrete services.",
-    image: "https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/alexis-residential-concrete%201.jpeg"
+    description: "Enhance your Tulsa home with our expert residential concrete services.",
+    image: "/images/alexis-residential-concrete 1.jpeg"
   },
   {
-    title: "Industrial Flooring",
-    description: "Durable and high-performance concrete flooring for industrial spaces.",
-    image: "https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/alexis-industriall-concrete%201.jpeg"
+    title: "Industrial Concrete",
+    description: "Durable and high-performance concrete solutions for industrial spaces in Tulsa.",
+    image: "/images/alexis-industriall-concrete 1.jpeg"
   },
   {
     title: "Decorative Concrete",
-    description: "Artistic and aesthetically pleasing concrete designs for any project.",
-    image: "https://raw.githubusercontent.com/UDGOK/alexis-bolt/refs/heads/main/public/images/alexis-pool-concrete%201.jpeg"
+    description: "Artistic and aesthetically pleasing concrete designs for any project in Tulsa.",
+    image: "/images/alexis-concrete-footings3.jpg"
+  },
+  {
+    title: "Trickle Channels",
+    description: "Expertly designed trickle channels for efficient water management in Tulsa and surrounding areas. Our solutions prevent erosion and improve drainage for residential and commercial properties.",
+    image: "/images/trickle-channel.png"
+  },
+  {
+    title: "Sidewalks",
+    description: "Premium sidewalk construction and repair services for Tulsa, Jenks, Owasso, and Bixby. We create safe, durable, and ADA-compliant walkways that enhance your property's curb appeal and accessibility.",
+    image: "/images/sidewalk-concrete.jpg"
+  },
+  {
+    title: "Retention Ponds",
+    description: "Custom-engineered concrete retention ponds for effective stormwater management in Tulsa. Our solutions help control flooding, improve water quality, and comply with local regulations while blending seamlessly with the landscape.",
+    image: "/images/concrete-retention-pond.jpg"
   },
 ]

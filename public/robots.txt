@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.alexisconcreteandasphalttulsa.com
+
+# Sitemaps
+Sitemap: https://www.alexisconcreteandasphalttulsa.com/sitemap.xml

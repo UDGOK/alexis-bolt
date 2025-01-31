@@ -1,27 +1,34 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import React from "react";
+import { motion, MotionProps, MotionValue, HTMLMotionProps } from 'framer-motion'
+import { ElementType, ReactNode, forwardRef } from 'react'
 
-interface MotionWrapperProps {
-  children: React.ReactNode;
-  className?: string;
-  [key: string]: any; // for other motion props
+type MotionWrapperProps = Omit<MotionProps, 'style'> & {
+  children: ReactNode
+  style?: {
+    [key: string]: string | number | MotionValue<number> | MotionValue<string> | undefined
+  }
+  motionTag?: ElementType
+  className?: string
+  href?: string
 }
 
-export const MotionWrapper: React.FC<MotionWrapperProps> = ({ 
-  children, 
-  className = "", 
-  ...props 
-}) => {
-  return (
-    <motion.div 
-      className={className} 
-      {...props}
-    >
-      {children}
-    </motion.div>
-  );
-};
+export const MotionWrapper = forwardRef<HTMLElement, MotionWrapperProps>(
+  ({ children, style, motionTag = 'div', className, href, ...props }, ref) => {
+    const MotionComponent = (motion[motionTag as keyof typeof motion] || motion.div) as ElementType<HTMLMotionProps<any>>
 
-export default MotionWrapper;
+    return (
+      <MotionComponent 
+        ref={ref}
+        {...props}
+        style={style}
+        className={className}
+        href={href}
+      >
+        {children}
+      </MotionComponent>
+    )
+  }
+)
+
+MotionWrapper.displayName = 'MotionWrapper'

@@ -1,22 +1,26 @@
 {
   "components\\MotionWrapper.tsx -> framer-motion": {
-    "id": 5011,
+    "id": "components\\MotionWrapper.tsx -> framer-motion",
     "files": [
-      "static/chunks/424-823e38a0f0b57b01.js",
-      "static/chunks/837-e5b202d7a0916626.js",
-      "static/chunks/11.6262e427ee9705d5.js"
+      "static/chunks/_app-pages-browser_node_modules_framer-motion_dist_es_index_mjs.js"
+    ]
+  },
+  "node_modules\\next\\dist\\client\\components\\react-dev-overlay\\internal\\helpers\\use-websocket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts": {
+    "id": "node_modules\\next\\dist\\client\\components\\react-dev-overlay\\internal\\helpers\\use-websocket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js"
     ]
   },
   "node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
-    "id": 35203,
+    "id": "node_modules\\next\\dist\\client\\index.js -> ../pages/_app",
     "files": [
-      "static/chunks/203.215f7ebb412294c3.js"
+      "static/chunks/node_modules_next_dist_pages__app_js.js"
     ]
   },
   "node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
-    "id": 86218,
+    "id": "node_modules\\next\\dist\\client\\index.js -> ../pages/_error",
     "files": [
-      "static/chunks/218.61652cd84faa3076.js"
+      "static/chunks/node_modules_next_dist_pages__error_js.js"
     ]
   }
 }
