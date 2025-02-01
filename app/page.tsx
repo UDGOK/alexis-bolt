@@ -52,9 +52,9 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="z-10 text-center mb-8 px-4 sm:px-0"
+          className="z-10 w-full px-4 sm:px-6 lg:px-8"
         >
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-[clamp(48px,8vw,120px)] font-extralight tracking-[-0.02em] text-primary-foreground leading-[0.9] md:leading-[0.85]">
               Concrete & Asphalt<br />Experts in Tulsa
             </h1>
