@@ -102,7 +102,7 @@ export default function BuildingErectionPage() {
           >
             "Alexis Building Erection delivered exceptional quality and professionalism. Their expertise transformed our project beyond expectations."
           </MotionWrapper>
-          <p className="text-white/70 font-light">John Doe, CEO of BuildRight Inc.</p>
+          <p className="text-white/70 font-light">Yasir Jahangir, CEO of Upscale Development Group (udgok.com)</p>
         </div>
       </section>
 
