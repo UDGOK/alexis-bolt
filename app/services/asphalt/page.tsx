@@ -196,42 +196,46 @@ export default function AsphaltServicesPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <MotionWrapper
+              <div
                 key={service.title}
-                motionTag="div"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative p-6 rounded-2xl bg-white/5 cursor-pointer"
                 onClick={() => setExpandedService(expandedService === service.title ? null : service.title)}
+                className="cursor-pointer"
               >
-                <h3 className="text-2xl font-light tracking-tight mb-4">
-                  {service.title}
-                </h3>
-                <p className="text-white/70 font-light">
-                  {service.shortDescription}
-                </p>
-                <AnimatePresence>
-                  {expandedService === service.title && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="mt-4"
-                    >
-                      <Image
-                        src={service.image}
-                        alt={`${service.title} in Tulsa and surrounding areas`}
-                        width={400}
-                        height={300}
-                        className="rounded-lg mb-4"
-                      />
-                      <p className="text-white/70 font-light">{service.longDescription}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </MotionWrapper>
+                <MotionWrapper
+                  motionTag="div"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative p-6 rounded-2xl bg-white/5"
+                >
+                  <h3 className="text-2xl font-light tracking-tight mb-4">
+                    {service.title}
+                  </h3>
+                  <p className="text-white/70 font-light">
+                    {service.shortDescription}
+                  </p>
+                  <AnimatePresence>
+                    {expandedService === service.title && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="mt-4"
+                      >
+                        <Image
+                          src={service.image}
+                          alt={`${service.title} in Tulsa and surrounding areas`}
+                          width={400}
+                          height={300}
+                          className="rounded-lg mb-4"
+                        />
+                        <p className="text-white/70 font-light">{service.longDescription}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </MotionWrapper>
+              </div>
             ))}
           </div>
         </div>
