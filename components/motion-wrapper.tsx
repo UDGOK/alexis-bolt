@@ -11,19 +11,21 @@ type MotionWrapperProps = Omit<MotionProps, 'style'> & {
   motionTag?: ElementType
   className?: string
   href?: string
+  onClick?: () => void
 }
 
 export const MotionWrapper = forwardRef<HTMLElement, MotionWrapperProps>(
-  ({ children, style, motionTag = 'div', className, href, ...props }, ref) => {
+  ({ children, style, motionTag = 'div', className, href, onClick, ...props }, ref) => {
     const MotionComponent = (motion[motionTag as keyof typeof motion] || motion.div) as ElementType<HTMLMotionProps<any>>
 
     return (
-      <MotionComponent 
+      <MotionComponent
         ref={ref}
         {...props}
         style={style}
         className={className}
         href={href}
+        onClick={onClick}
       >
         {children}
       </MotionComponent>

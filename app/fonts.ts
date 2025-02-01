@@ -1,8 +1,8 @@
-import { Roboto_Condensed } from 'next/font/google'
+import { Oswald } from 'next/font/google'
 
-export const font = Roboto_Condensed({
+export const font = Oswald({
   subsets: ['latin'],
+  weight: ['500', '700'],
   display: 'swap',
   variable: '--font-primary',
-  weight: ['300', '400', '700'],
 })

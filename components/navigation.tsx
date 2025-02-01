@@ -5,43 +5,44 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { MotionWrapper } from './motion-wrapper'
-import { Menu, X, Building, HardHat, Paintbrush, Hammer, Info, FileText, HelpCircle, Image as ImageIcon, Download, Mail } from 'lucide-react'
+import { Menu, X, Building, HardHat, Paintbrush, Hammer, Info, FileText, HelpCircle, Image as ImageIcon, Download, Mail, Shovel } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const menuItems = [
   {
     name: 'Services',
     items: [
-      { name: 'Concrete Services', href: '/services/concrete', icon: <Building className="w-5 h-5" /> },
-      { name: 'Asphalt Services', href: '/services/asphalt', icon: <HardHat className="w-5 h-5" /> },
-      { name: 'Resurfacing', href: '/services/resurfacing', icon: <Paintbrush className="w-5 h-5" /> },
-      { name: 'Building Erection', href: '/services/building-erection', icon: <Hammer className="w-5 h-5" /> },
+      { name: 'Concrete Services', href: '/services/concrete', icon: <Building className="w-6 h-6" /> },
+      { name: 'Asphalt Services', href: '/services/asphalt', icon: <HardHat className="w-6 h-6" /> },
+      { name: 'Resurfacing', href: '/services/resurfacing', icon: <Paintbrush className="w-6 h-6" /> },
+      { name: 'Building Erection', href: '/services/building-erection', icon: <Hammer className="w-6 h-6" /> },
+      { name: 'Excavation Services', href: '/services/excavation', icon: <Shovel className="w-6 h-6" /> },
     ],
   },
   {
     name: 'Company',
     items: [
-      { name: 'About', href: '/about', icon: <Info className="w-5 h-5" /> },
-      { name: 'Projects', href: '/projects', icon: <FileText className="w-5 h-5" /> },
-      { name: 'Media', href: '/company/media', icon: <ImageIcon className="w-5 h-5" /> },
-      { name: 'Terms', href: '/terms', icon: <FileText className="w-5 h-5" /> },
+      { name: 'About', href: '/about', icon: <Info className="w-6 h-6" /> },
+      { name: 'Projects', href: '/projects', icon: <FileText className="w-6 h-6" /> },
+      { name: 'Media', href: '/company/media', icon: <ImageIcon className="w-6 h-6" /> },
+      { name: 'Terms', href: '/terms', icon: <FileText className="w-6 h-6" /> },
     ],
   },
   {
     name: 'Resources',
     items: [
-      { name: 'FAQ', href: '/resources/faq', icon: <HelpCircle className="w-5 h-5" /> },
-      { name: 'Technical', href: '/resources/technical', icon: <FileText className="w-5 h-5" /> },
-      { name: 'Concrete Calculator', href: '/resources/concrete-calculator', icon: <FileText className="w-5 h-5" /> },
-      { name: 'Asphalt Calculator', href: '/resources/asphalt-calculator', icon: <FileText className="w-5 h-5" /> },
-      { name: 'Rebar Calculator', href: '/resources/rebar-calculator', icon: <FileText className="w-5 h-5" /> },
-      { name: 'Gravel Calculator', href: '/resources/gravel-calculator', icon: <FileText className="w-5 h-5" /> },
+      { name: 'FAQ', href: '/resources/faq', icon: <HelpCircle className="w-6 h-6" /> },
+      { name: 'Technical', href: '/resources/technical', icon: <FileText className="w-6 h-6" /> },
+      { name: 'Concrete Calculator', href: '/resources/concrete-calculator', icon: <FileText className="w-6 h-6" /> },
+      { name: 'Asphalt Calculator', href: '/resources/asphalt-calculator', icon: <FileText className="w-6 h-6" /> },
+      { name: 'Rebar Calculator', href: '/resources/rebar-calculator', icon: <FileText className="w-6 h-6" /> },
+      { name: 'Gravel Calculator', href: '/resources/gravel-calculator', icon: <FileText className="w-6 h-6" /> },
     ],
   },
   {
     name: 'Contact',
     items: [
-      { name: 'Contact Us', href: '/contact', icon: <Mail className="w-5 h-5" /> },
+      { name: 'Contact Us', href: '/contact', icon: <Mail className="w-6 h-6" /> },
     ],
   },
 ]
@@ -106,7 +107,7 @@ export function Navigation() {
           </div>
           <div className={`py-4 px-6 ${
             isScrolled || isMobileMenuOpen
-              ? 'bg-secondary text-primary-foreground'
+              ? 'bg-primary text-primary-foreground'
               : 'bg-background text-secondary'
           }`}>
             {/* Desktop Menu */}
@@ -119,7 +120,7 @@ export function Navigation() {
                   onMouseLeave={handleMouseLeave}
                 >
                   <button
-                    className={`text-base font-bold tracking-wide uppercase ${
+                    className={`text-xl font-bold tracking-wide uppercase ${
                       isScrolled || isMobileMenuOpen
                         ? 'text-primary-foreground hover:text-primary-foreground'
                         : 'text-secondary hover:text-secondary'
@@ -137,7 +138,7 @@ export function Navigation() {
                     className="absolute right-0 top-full pt-2"
                   >
                     {activeMenu === item.name && (
-                      <div className="bg-secondary/90 backdrop-blur-md py-6 px-4 min-w-[260px] rounded-md shadow-lg">
+                      <div className="bg-primary/90 backdrop-blur-md py-6 px-4 min-w-[300px] rounded-md shadow-lg">
                         <motion.div className="flex flex-col gap-2">
                           {item.items.map((subItem, index) => (
                             <motion.div
@@ -148,8 +149,8 @@ export function Navigation() {
                             >
                               <Link
                                 href={subItem.href}
-                                className={`flex items-center gap-3 px-4 py-3 text-sm font-medium tracking-wide uppercase text-primary-foreground hover:bg-primary/10 rounded-md transition-all duration-200 ease-in-out ${
-                                  pathname === subItem.href ? 'bg-primary/20 text-primary' : ''
+                                className={`flex items-center gap-3 px-4 py-3 text-lg font-medium tracking-wide uppercase text-secondary hover:bg-primary-foreground/10 rounded-md transition-all duration-200 ease-in-out ${
+                                  pathname === subItem.href ? 'bg-primary-foreground/20 text-secondary' : ''
                                 }`}
                               >
                                 <motion.div
@@ -182,7 +183,7 @@ export function Navigation() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
-            <Menu className="h-8 w-8" />
+            <Menu className="h-10 w-10" />
           </button>
         </div>
 
@@ -194,7 +195,7 @@ export function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-secondary z-50 md:hidden"
+              className="fixed inset-0 bg-primary z-50 md:hidden"
               style={{ top: '0' }}
             >
               <div className="flex flex-col h-full">
@@ -214,10 +215,10 @@ export function Navigation() {
                   </Link>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-primary-foreground hover:text-primary-foreground transition-colors"
+                    className="text-primary-foreground hover:text-primary-foreground/80 transition-colors"
                     aria-label="Close menu"
                   >
-                    <X className="h-6 w-6" />
+                    <X className="h-8 w-8" />
                   </button>
                 </div>
                 
@@ -231,7 +232,7 @@ export function Navigation() {
                   {menuItems.map((item) => (
                     <div key={item.name} className="mb-8">
                       <button
-                        className="text-2xl font-bold tracking-wide uppercase mb-6 text-primary-foreground hover:text-primary transition-colors"
+                        className="text-3xl font-bold tracking-wide uppercase mb-6 text-primary-foreground hover:text-primary-foreground/80 transition-colors"
                         onClick={() => setActiveMenu(activeMenu === item.name ? null : item.name)}
                       >
                         {item.name}
@@ -247,7 +248,7 @@ export function Navigation() {
                             <Link
                               key={subItem.name}
                               href={subItem.href}
-                              className="text-lg font-medium tracking-wide uppercase text-primary-foreground/70 hover:text-primary transition-colors"
+                              className="text-xl font-medium tracking-wide uppercase text-secondary hover:text-secondary/80 transition-colors"
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
                               {subItem.name}

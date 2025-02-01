@@ -34,35 +34,72 @@ html {
 body {
   @apply bg-background text-foreground;
   font-family: var(--font-primary), sans-serif;
-  font-feature-settings: "salt" on, "ss01" on, "ss02" on;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 24px;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-  
-  .font-light {
-    font-weight: 300;
-  }
-  
-  .font-normal {
-    font-weight: 400;
-  }
-  
-  .font-bold {
-    font-weight: 700;
-  }
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-bold;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 4.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2.5rem;
+}
+
+h5 {
+  font-size: 2rem;
+}
+
+h6 {
+  font-size: 1.75rem;
 }
 
 p {
-  @apply font-normal;
+  margin-bottom: 1em;
+  font-size: 1.25rem;
+}
+
+/* Text effects */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(45deg, #ff6b6b, #feca57);
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text-outline {
+  -webkit-text-stroke: 2px black;
+  color: white;
 }
 
 /* Smooth transitions */
@@ -74,7 +111,7 @@ p {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
