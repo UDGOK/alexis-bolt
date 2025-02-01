@@ -1,13 +1,22 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { ScrollSection } from '../components/ScrollSection'
 import { MotionWrapper } from '../components/MotionWrapper'
 import CalculatorIcon from '../components/CalculatorIcon'
+import RecentBlogPosts from '../components/RecentBlogPosts'
 
 export default function Home() {
+  useEffect(() => {
+    console.log('Home component mounted');
+  }, []);
+
+  useEffect(() => {
+    console.log('About to render RecentBlogPosts');
+  }, []);
+
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -255,6 +264,11 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </ScrollSection>
+
+      {/* Recent Blog Posts Section */}
+      <ScrollSection className="py-2">
+        <RecentBlogPosts />
       </ScrollSection>
 
       {/* CTA Section */}
