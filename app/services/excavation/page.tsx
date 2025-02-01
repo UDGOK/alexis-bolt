@@ -30,7 +30,7 @@ export default function ExcavationServices() {
   return (
     <div className="overflow-hidden">
       <ParallaxSection
-        imageUrl="/images/alexis-concrete-footings.jpg"
+        bgImage="/images/alexis-concrete-footings.jpg"
         height="80vh"
         overlayContent={
           <div className="text-center text-white">
