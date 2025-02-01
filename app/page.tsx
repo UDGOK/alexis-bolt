@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <main className="relative bg-background text-foreground">
       {/* Hero Section */}
-      <div ref={heroRef} className="h-screen relative flex items-center justify-center overflow-hidden">
+      <div ref={heroRef} className="min-h-screen relative flex flex-col items-center justify-center overflow-hidden">
         <video
           src="/videos/projects-tulsa-1.mp4"
           autoPlay
@@ -35,7 +35,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="z-10 text-center"
+          className="z-10 text-center mb-8"
         >
           <h1 className="text-[clamp(48px,8vw,120px)] font-extralight tracking-[-0.02em] text-primary-foreground leading-[0.9] md:leading-[0.85]">
             Concrete & Asphalt<br />Experts in Tulsa
@@ -44,18 +44,45 @@ export default function Home() {
             Premier concrete and asphalt solutions for Tulsa and surrounding areas
           </p>
         </MotionWrapper>
+        
+        {/* Calculators Section */}
+        <div className="container mx-auto z-10">
+          <h2 className="text-4xl md:text-5xl font-light tracking-tight text-primary-foreground mb-4 text-center">
+            Project Calculators
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { name: 'Concrete Calculator', icon: '🧱', path: '/resources/concrete-calculator' },
+              { name: 'Asphalt Calculator', icon: '🛣️', path: '/resources/asphalt-calculator' },
+              { name: 'Rebar Calculator', icon: '🔧', path: '/resources/rebar-calculator' },
+              { name: 'Gravel Calculator', icon: '🪨', path: '/resources/gravel-calculator' },
+            ].map((calc) => (
+              <MotionWrapper
+                key={calc.name}
+                motionTag="a"
+                href={calc.path}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-primary-foreground/20 backdrop-blur-sm p-4 rounded-lg shadow-lg text-center flex flex-col items-center justify-center hover:bg-primary-foreground/30 transition-colors duration-300"
+              >
+                <span className="text-4xl mb-2">{calc.icon}</span>
+                <h3 className="text-xl font-light text-primary-foreground">{calc.name}</h3>
+              </MotionWrapper>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Feature Section 1 */}
-      <ScrollSection>
-        <div className="container mx-auto px-6 py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
+      <ScrollSection className="py-2">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+            <div className="space-y-2">
               <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary">
                 Premium Concrete Solutions in Tulsa
               </h2>
               <p className="text-xl font-light text-muted-foreground">
-                Looking for top-notch concrete services in Tulsa? We specialize in premium concrete solutions, including driveways, patios, foundations, and more. With years of experience and a commitment to quality, we deliver durable, beautiful results tailored to your needs. Whether it's residential or commercial, trust us to bring your vision to life. Contact us today for reliable, affordable concrete services in Tulsa, OK!
+                Looking for top-notch concrete services in Tulsa? We specialize in premium concrete solutions, including driveways, patios, foundations, and more. With years of experience and a commitment to quality, we deliver durable, beautiful results tailored to your needs.
               </p>
               <ul className="list-disc list-inside text-lg font-light text-muted-foreground">
                 <li>Expert concrete pouring and finishing</li>
@@ -82,9 +109,9 @@ export default function Home() {
       </ScrollSection>
 
       {/* Feature Section 2 */}
-      <ScrollSection className="bg-secondary text-secondary-foreground">
-        <div className="container mx-auto px-6 py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <ScrollSection className="bg-secondary text-secondary-foreground py-2">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <MotionWrapper
               motionTag="div"
               whileHover={{ scale: 1.02 }}
@@ -98,12 +125,12 @@ export default function Home() {
                 className="object-cover transition-transform duration-700 hover:scale-110"
               />
             </MotionWrapper>
-            <div className="space-y-6">
+            <div className="space-y-2">
               <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary">
                 Site Preparation & Excavation
               </h2>
               <p className="text-xl font-light text-secondary-foreground/70">
-                From initial groundwork to final grading, our fleet of modern equipment and skilled operators ensure your project starts with a solid foundation. Start your project on the right foundation with our professional site preparation and excavation services in Tulsa, OK. From land clearing to grading and leveling, we ensure your site is ready for construction with precision and care. Our experienced team uses advanced equipment to handle projects of all sizes, delivering efficient and reliable results. Trust us to prepare your site for success—contact us today for a free consultation!
+                From initial groundwork to final grading, our fleet of modern equipment and skilled operators ensure your project starts with a solid foundation. Start your project on the right foundation with our professional site preparation and excavation services in Tulsa, OK.
               </p>
               <ul className="list-disc list-inside text-lg font-light text-secondary-foreground/70">
                 <li>Precise land clearing and grading</li>
@@ -117,10 +144,10 @@ export default function Home() {
       </ScrollSection>
 
       {/* New Asphalt Section */}
-      <ScrollSection>
-        <div className="container mx-auto px-6 py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
+      <ScrollSection className="py-2">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+            <div className="space-y-2">
               <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary">
                 Tulsa Asphalt Experts
               </h2>
@@ -152,9 +179,9 @@ export default function Home() {
       </ScrollSection>
 
       {/* Feature Grid */}
-      <ScrollSection>
-        <div className="container mx-auto px-6 py-24">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <ScrollSection className="py-2">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {features.map((feature, index) => (
               <MotionWrapper
                 key={feature.title}
@@ -170,8 +197,8 @@ export default function Home() {
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-light tracking-tight mb-2 text-primary-foreground">
+                <div className="absolute bottom-0 left-0 right-0 p-2">
+                  <h3 className="text-2xl font-light tracking-tight mb-1 text-primary-foreground">
                     {feature.title}
                   </h3>
                   <p className="text-sm font-light text-primary-foreground/70">
@@ -184,32 +211,61 @@ export default function Home() {
         </div>
       </ScrollSection>
 
+      {/* Calculators Section */}
+      <ScrollSection className="py-2">
+        <div className="container mx-auto">
+          <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary mb-2 text-center">
+            Project Calculators
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+            {[
+              { name: 'Concrete Calculator', icon: '🧱', path: '/resources/concrete-calculator' },
+              { name: 'Asphalt Calculator', icon: '🛣️', path: '/resources/asphalt-calculator' },
+              { name: 'Rebar Calculator', icon: '🔧', path: '/resources/rebar-calculator' },
+              { name: 'Gravel Calculator', icon: '🪨', path: '/resources/gravel-calculator' },
+            ].map((calc) => (
+              <MotionWrapper
+                key={calc.name}
+                motionTag="a"
+                href={calc.path}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-secondary p-2 rounded-lg shadow-lg text-center flex flex-col items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+              >
+                <span className="text-3xl mb-1">{calc.icon}</span>
+                <h3 className="text-xl font-light text-secondary-foreground">{calc.name}</h3>
+              </MotionWrapper>
+            ))}
+          </div>
+        </div>
+      </ScrollSection>
+
       {/* Testimonials Section */}
-      <ScrollSection className="bg-secondary text-secondary-foreground">
-        <div className="container mx-auto px-6 py-24">
-          <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary mb-12 text-center">
+      <ScrollSection className="bg-secondary text-secondary-foreground py-2">
+        <div className="container mx-auto">
+          <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary mb-2 text-center">
             What Our Tulsa Clients Say
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-background p-6 rounded-lg shadow-lg">
-              <p className="text-lg font-light mb-4 text-orange-500">"Alexis Concrete & Asphalt transformed our driveway with their expert concrete work. The team was professional, efficient, and the results exceeded our expectations. Highly recommended for any concrete project in Tulsa!"</p>
-              <p className="font-semibold text-orange-600">- Sarah T., Tulsa Homeowner</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="bg-background p-2 rounded-lg shadow-lg">
+              <p className="text-lg font-light mb-1 text-orange-500">"Alexis Concrete & Asphalt transformed our driveway with their expert concrete work. The team was professional, efficient, and the results exceeded our expectations. Highly recommended for any concrete project in Tulsa!"</p>
+              <p className="font-semibold text-orange-600 text-sm">- Sarah T., Tulsa Homeowner</p>
             </div>
-            <div className="bg-background p-6 rounded-lg shadow-lg">
-              <p className="text-lg font-light mb-4 text-orange-500">"As a business owner in Tulsa, I needed a reliable asphalt contractor for our parking lot renovation. Alexis delivered outstanding results on time and within budget. Their asphalt sealing service has significantly extended the life of our pavement."</p>
-              <p className="font-semibold text-orange-600">- Mike R., Tulsa Business Owner</p>
+            <div className="bg-background p-2 rounded-lg shadow-lg">
+              <p className="text-lg font-light mb-1 text-orange-500">"As a business owner in Tulsa, I needed a reliable asphalt contractor for our parking lot renovation. Alexis delivered outstanding results on time and within budget. Their asphalt sealing service has significantly extended the life of our pavement."</p>
+              <p className="font-semibold text-orange-600 text-sm">- Mike R., Tulsa Business Owner</p>
             </div>
           </div>
         </div>
       </ScrollSection>
 
       {/* CTA Section */}
-      <ScrollSection className="bg-primary text-primary-foreground">
-        <div className="container mx-auto px-6 text-center py-24">
-          <h2 className="text-4xl md:text-6xl font-light tracking-tight mb-8">
+      <ScrollSection className="bg-primary text-primary-foreground py-2">
+        <div className="container mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-light tracking-tight mb-1">
             Ready to start your Tulsa project?
           </h2>
-          <p className="text-xl font-light mb-8">
+          <p className="text-xl font-light mb-2">
             Whether it's concrete, asphalt, or site preparation, we're here to bring your vision to life in Tulsa and surrounding areas.
           </p>
           <MotionWrapper
@@ -217,7 +273,7 @@ export default function Home() {
             href="/contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block bg-background text-primary px-8 py-4 rounded-full text-lg font-light tracking-tight"
+            className="inline-block bg-background text-primary px-4 py-2 rounded-full text-lg font-light tracking-tight"
           >
             Get a Free Quote
           </MotionWrapper>
