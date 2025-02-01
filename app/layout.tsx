@@ -1,5 +1,5 @@
 import './globals.css'
-import { font } from './fonts'
+import { primaryFont, secondaryFont } from './fonts'
 import { Navigation } from "../components/navigation"
 import { Footer } from "../components/footer"
 import { AnnouncementBanner } from "../components/announcement-banner"
@@ -40,8 +40,8 @@ export default function RootLayout({
 }) {
   const { isValid, missingEnvVars } = validateEnv()
   return (
-    <html lang="en" className={`scroll-smooth ${font.variable}`}>
-      <body className={`min-h-screen antialiased ${font.variable} font-primary`}>
+    <html lang="en" className={`scroll-smooth ${primaryFont.variable} ${secondaryFont.variable}`}>
+      <body className={`min-h-screen antialiased ${secondaryFont.variable}`}>
         <LocalBusinessSchema
           name="Alexis Concrete and Asphalt"
           description="Expert concrete and asphalt services in Tulsa and surrounding areas. Quality workmanship for commercial and residential projects."

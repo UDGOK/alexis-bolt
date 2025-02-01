@@ -85,7 +85,7 @@ export function Footer() {
           {/* Links Section */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-16 gap-y-12">
             <div>
-              <h3 className="text-[13px] text-[#666666] mb-4">Products</h3>
+              <h3 className="text-[13px] text-[#666666] mb-4">Services</h3>
               <div className="grid gap-[10px]">
                 <Link href="/services/concrete" className="text-[15px] text-[#999999] hover:text-white transition-colors">
                   Concrete
@@ -95,6 +95,12 @@ export function Footer() {
                 </Link>
                 <Link href="/services/resurfacing" className="text-[15px] text-[#999999] hover:text-white transition-colors">
                   Resurfacing
+                </Link>
+                <Link href="/services/excavation" className="text-[15px] text-[#999999] hover:text-white transition-colors">
+                  Excavation
+                </Link>
+                <Link href="/services/building-erection" className="text-[15px] text-[#999999] hover:text-white transition-colors">
+                  Building Erection
                 </Link>
               </div>
             </div>

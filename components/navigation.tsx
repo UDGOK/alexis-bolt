@@ -5,44 +5,55 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { MotionWrapper } from './motion-wrapper'
-import { Menu, X, Building, HardHat, Paintbrush, Hammer, Info, FileText, HelpCircle, Image as ImageIcon, Download, Mail, Shovel } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import CalculatorIcon, { CalculatorIconProps } from './CalculatorIcon'
 
-const menuItems = [
+type MenuItem = {
+  name: string;
+  items: {
+    name: string;
+    href: string;
+    icon: CalculatorIconProps['name'];
+  }[];
+};
+
+const menuItems: MenuItem[] = [
   {
     name: 'Services',
     items: [
-      { name: 'Concrete Services', href: '/services/concrete', icon: <Building className="w-6 h-6" /> },
-      { name: 'Asphalt Services', href: '/services/asphalt', icon: <HardHat className="w-6 h-6" /> },
-      { name: 'Resurfacing', href: '/services/resurfacing', icon: <Paintbrush className="w-6 h-6" /> },
-      { name: 'Building Erection', href: '/services/building-erection', icon: <Hammer className="w-6 h-6" /> },
-      { name: 'Excavation Services', href: '/services/excavation', icon: <Shovel className="w-6 h-6" /> },
+      { name: 'Concrete Services', href: '/services/concrete', icon: 'concrete' },
+      { name: 'Asphalt Services', href: '/services/asphalt', icon: 'asphalt' },
+      { name: 'Resurfacing', href: '/services/resurfacing', icon: 'resurfacing' },
+      { name: 'Building Erection', href: '/services/building-erection', icon: 'building' },
+      { name: 'Excavation Services', href: '/services/excavation', icon: 'excavation' },
     ],
   },
   {
     name: 'Company',
     items: [
-      { name: 'About', href: '/about', icon: <Info className="w-6 h-6" /> },
-      { name: 'Projects', href: '/projects', icon: <FileText className="w-6 h-6" /> },
-      { name: 'Media', href: '/company/media', icon: <ImageIcon className="w-6 h-6" /> },
-      { name: 'Terms', href: '/terms', icon: <FileText className="w-6 h-6" /> },
+      { name: 'About', href: '/about', icon: 'building' },
+      { name: 'Projects', href: '/projects', icon: 'technical' },
+      { name: 'Media', href: '/company/media', icon: 'downloads' },
+      { name: 'Terms', href: '/terms', icon: 'technical' },
     ],
   },
   {
     name: 'Resources',
     items: [
-      { name: 'FAQ', href: '/resources/faq', icon: <HelpCircle className="w-6 h-6" /> },
-      { name: 'Technical', href: '/resources/technical', icon: <FileText className="w-6 h-6" /> },
-      { name: 'Concrete Calculator', href: '/resources/concrete-calculator', icon: <FileText className="w-6 h-6" /> },
-      { name: 'Asphalt Calculator', href: '/resources/asphalt-calculator', icon: <FileText className="w-6 h-6" /> },
-      { name: 'Rebar Calculator', href: '/resources/rebar-calculator', icon: <FileText className="w-6 h-6" /> },
-      { name: 'Gravel Calculator', href: '/resources/gravel-calculator', icon: <FileText className="w-6 h-6" /> },
+      { name: 'FAQ', href: '/resources/faq', icon: 'faq' },
+      { name: 'Technical', href: '/resources/technical', icon: 'technical' },
+      { name: 'Downloads', href: '/resources/downloads', icon: 'downloads' },
+      { name: 'Concrete Calculator', href: '/resources/concrete-calculator', icon: 'concrete' },
+      { name: 'Asphalt Calculator', href: '/resources/asphalt-calculator', icon: 'asphalt' },
+      { name: 'Rebar Calculator', href: '/resources/rebar-calculator', icon: 'rebar' },
+      { name: 'Gravel Calculator', href: '/resources/gravel-calculator', icon: 'gravel' },
     ],
   },
   {
     name: 'Contact',
     items: [
-      { name: 'Contact Us', href: '/contact', icon: <Mail className="w-6 h-6" /> },
+      { name: 'Contact Us', href: '/contact', icon: 'technical' },
     ],
   },
 ]
@@ -158,7 +169,7 @@ export function Navigation() {
                                   whileHover={{ scale: 1.1 }}
                                   transition={{ duration: 0.2 }}
                                 >
-                                  {subItem.icon}
+                                  <CalculatorIcon name={subItem.icon} className="w-6 h-6" />
                                 </motion.div>
                                 <span>{subItem.name}</span>
                               </Link>
@@ -248,10 +259,11 @@ export function Navigation() {
                             <Link
                               key={subItem.name}
                               href={subItem.href}
-                              className="text-xl font-medium tracking-wide uppercase text-secondary hover:text-secondary/80 transition-colors"
+                              className="flex items-center gap-3 text-xl font-medium tracking-wide uppercase text-secondary hover:text-secondary/80 transition-colors"
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
-                              {subItem.name}
+                              <CalculatorIcon name={subItem.icon} className="w-6 h-6" />
+                              <span>{subItem.name}</span>
                             </Link>
                           ))}
                         </div>

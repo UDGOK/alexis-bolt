@@ -5,6 +5,7 @@ import { useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { ScrollSection } from '../components/ScrollSection'
 import { MotionWrapper } from '../components/MotionWrapper'
+import CalculatorIcon from '../components/CalculatorIcon'
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null)
@@ -15,6 +16,13 @@ export default function Home() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.2])
+
+  const calculators = [
+    { name: 'Concrete Calculator', icon: 'concrete', path: '/resources/concrete-calculator' },
+    { name: 'Asphalt Calculator', icon: 'asphalt', path: '/resources/asphalt-calculator' },
+    { name: 'Rebar Calculator', icon: 'rebar', path: '/resources/rebar-calculator' },
+    { name: 'Gravel Calculator', icon: 'gravel', path: '/resources/gravel-calculator' },
+  ]
 
   return (
     <main className="relative bg-background text-foreground">
@@ -45,18 +53,13 @@ export default function Home() {
           </p>
         </MotionWrapper>
         
-        {/* Calculators Section */}
+        {/* Calculators Section in Hero */}
         <div className="container mx-auto z-10">
-          <h2 className="text-4xl md:text-5xl font-light tracking-tight text-primary-foreground mb-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-light tracking-tight text-primary-foreground mb-8 text-center">
             Project Calculators
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { name: 'Concrete Calculator', icon: '🧱', path: '/resources/concrete-calculator' },
-              { name: 'Asphalt Calculator', icon: '🛣️', path: '/resources/asphalt-calculator' },
-              { name: 'Rebar Calculator', icon: '🔧', path: '/resources/rebar-calculator' },
-              { name: 'Gravel Calculator', icon: '🪨', path: '/resources/gravel-calculator' },
-            ].map((calc) => (
+            {calculators.map((calc) => (
               <MotionWrapper
                 key={calc.name}
                 motionTag="a"
@@ -65,7 +68,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-primary-foreground/20 backdrop-blur-sm p-4 rounded-lg shadow-lg text-center flex flex-col items-center justify-center hover:bg-primary-foreground/30 transition-colors duration-300"
               >
-                <span className="text-4xl mb-2">{calc.icon}</span>
+                <CalculatorIcon name={calc.icon as any} className="w-12 h-12 mb-2 text-primary-foreground" />
                 <h3 className="text-xl font-light text-primary-foreground">{calc.name}</h3>
               </MotionWrapper>
             ))}
@@ -214,16 +217,11 @@ export default function Home() {
       {/* Calculators Section */}
       <ScrollSection className="py-2">
         <div className="container mx-auto">
-          <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary mb-2 text-center">
+          <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary mb-8 text-center">
             Project Calculators
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-            {[
-              { name: 'Concrete Calculator', icon: '🧱', path: '/resources/concrete-calculator' },
-              { name: 'Asphalt Calculator', icon: '🛣️', path: '/resources/asphalt-calculator' },
-              { name: 'Rebar Calculator', icon: '🔧', path: '/resources/rebar-calculator' },
-              { name: 'Gravel Calculator', icon: '🪨', path: '/resources/gravel-calculator' },
-            ].map((calc) => (
+            {calculators.map((calc) => (
               <MotionWrapper
                 key={calc.name}
                 motionTag="a"
@@ -232,7 +230,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-secondary p-2 rounded-lg shadow-lg text-center flex flex-col items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
               >
-                <span className="text-3xl mb-1">{calc.icon}</span>
+                <CalculatorIcon name={calc.icon as any} className="w-10 h-10 mb-1 text-secondary-foreground" />
                 <h3 className="text-xl font-light text-secondary-foreground">{calc.name}</h3>
               </MotionWrapper>
             ))}
