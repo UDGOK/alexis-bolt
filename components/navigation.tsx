@@ -27,6 +27,7 @@ const menuItems: MenuItem[] = [
       { name: 'Resurfacing', href: '/services/resurfacing', icon: 'resurfacing' },
       { name: 'Building Erection', href: '/services/building-erection', icon: 'building' },
       { name: 'Excavation Services', href: '/services/excavation', icon: 'excavation' },
+      { name: 'Heavy Civil Contracting', href: '/services/heavy-civil-contracting', icon: 'technical' },
     ],
   },
   {
