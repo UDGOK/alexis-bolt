@@ -52,14 +52,16 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="z-10 text-center mb-8"
+          className="z-10 text-center mb-8 px-4 sm:px-0"
         >
-          <h1 className="text-[clamp(48px,8vw,120px)] font-extralight tracking-[-0.02em] text-primary-foreground leading-[0.9] md:leading-[0.85]">
-            Concrete & Asphalt<br />Experts in Tulsa
-          </h1>
-          <p className="mt-4 text-xl font-light text-primary-foreground/80">
-            Premier concrete and asphalt solutions for Tulsa and surrounding areas
-          </p>
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-[clamp(48px,8vw,120px)] font-extralight tracking-[-0.02em] text-primary-foreground leading-[0.9] md:leading-[0.85]">
+              Concrete & Asphalt<br />Experts in Tulsa
+            </h1>
+            <p className="mt-4 text-xl font-light text-primary-foreground/80">
+              Premier concrete and asphalt solutions for Tulsa and surrounding areas
+            </p>
+          </div>
         </MotionWrapper>
         
         {/* Calculators Section in Hero */}
