@@ -288,20 +288,22 @@ export function Navigation() {
                       </motion.div>
                     </div>
                   ))}
-                  <Link
-                    href={blogMenuItem.href}
-                    className="text-3xl font-bold tracking-wide uppercase mb-6 text-primary-foreground hover:text-primary-foreground/80 transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {blogMenuItem.name}
-                  </Link>
-                  <Link
-                    href={contactMenuItem.href}
-                    className="text-3xl font-bold tracking-wide uppercase mb-6 text-primary-foreground hover:text-primary-foreground/80 transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {contactMenuItem.name}
-                  </Link>
+                  <div className="flex flex-col gap-6">
+                    <Link
+                      href={blogMenuItem.href}
+                      className="text-3xl font-bold tracking-wide uppercase text-primary-foreground hover:text-primary-foreground/80 transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {blogMenuItem.name}
+                    </Link>
+                    <Link
+                      href={contactMenuItem.href}
+                      className="text-3xl font-bold tracking-wide uppercase text-primary-foreground hover:text-primary-foreground/80 transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {contactMenuItem.name}
+                    </Link>
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
