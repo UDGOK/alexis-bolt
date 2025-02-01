@@ -1,14 +1,41 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
+import Head from 'next/head'
 import { ScrollSection } from '../components/ScrollSection'
 import { MotionWrapper } from '../components/MotionWrapper'
 import CalculatorIcon from '../components/CalculatorIcon'
 import RecentBlogPosts from '../components/RecentBlogPosts'
+import { LocalBusinessSchema } from '../components/local-business-schema'
+import Script from 'next/script'
+
+const features: Array<{
+  title: string;
+  description: string;
+  image: string;
+}> = [
+  {
+    title: 'Commercial Projects',
+    description: 'Comprehensive concrete and asphalt solutions for Tulsa businesses and organizations.',
+    image: '/images/alexis-commercial-concrete 1.jpeg',
+  },
+  {
+    title: 'Residential Concrete',
+    description: 'Expert concrete solutions for homes and properties in Tulsa and surrounding areas.',
+    image: '/images/alexis-residential-concrete 1.jpeg',
+  },
+  {
+    title: 'Industrial Concrete',
+    description: 'Durable concrete and asphalt solutions for industrial applications in Tulsa.',
+    image: '/images/alexis-industriall-concrete 1.jpeg',
+  },
+];
 
 export default function Home() {
+  const pageTitle = "Tulsa Concrete & Asphalt Experts | Alexis Concrete & Asphalt"
+  const pageDescription = "Premier concrete and asphalt solutions in Tulsa, Norman, Broken Arrow, and surrounding Oklahoma areas. Expert services for driveways, foundations, parking lots, and commercial projects. Serving Tulsa and nearby cities with top-quality construction solutions."
   useEffect(() => {
     console.log('Home component mounted');
   }, []);
@@ -34,7 +61,215 @@ export default function Home() {
   ]
 
   return (
-    <main className="relative bg-background text-foreground">
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Head>
+      <LocalBusinessSchema
+        name="Alexis Concrete & Asphalt"
+        description="Premier concrete and asphalt solutions in Tulsa and surrounding Oklahoma areas"
+        telephone="+1-918-555-1234"
+        address={{
+          streetAddress: "123 Main St",
+          addressLocality: "Tulsa",
+          addressRegion: "OK",
+          postalCode: "74103"
+        }}
+        geo={{
+          latitude: 36.1540,
+          longitude: -95.9928
+        }}
+        url="https://www.alexisconcreteandasphalttulsa.com"
+        image="/images/alexis-logo-new.png"
+        priceRange="$$"
+        openingHours={[
+          "Mo-Fr 08:00-17:00",
+          "Sa 09:00-13:00"
+        ]}
+      />
+      <Script id="schema-services" type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Alexis Concrete & Asphalt",
+            "description": "Premier concrete and asphalt solutions in Tulsa and surrounding Oklahoma areas",
+            "url": "https://www.alexisconcreteandasphalttulsa.com",
+            "telephone": "+1-918-555-1234",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "123 Main St",
+              "addressLocality": "Tulsa",
+              "addressRegion": "OK",
+              "postalCode": "74103",
+              "addressCountry": "US"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 36.1540,
+              "longitude": -95.9928
+            },
+            "areaServed": ["Tulsa", "Norman", "Broken Arrow", "Oklahoma City"],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Concrete and Asphalt Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Concrete Services",
+                    "description": "Expert concrete solutions for driveways, patios, foundations, and more"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Asphalt Services",
+                    "description": "Professional asphalt paving, repair, and maintenance for driveways, parking lots, and roadways"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Site Preparation & Excavation",
+                    "description": "Comprehensive site preparation, grading, and excavation services for construction projects"
+                  }
+                }
+              ]
+            }
+          }
+        `}
+      </Script>
+      <main className="relative bg-background text-foreground">
+        {/* Hero Section */}
+        {/* ... (keep existing hero section code) ... */}
+
+        {/* Feature Section 1 */}
+        {/* ... (keep existing feature section 1 code) ... */}
+
+        {/* Feature Section 2 */}
+        {/* ... (keep existing feature section 2 code) ... */}
+
+        {/* New Asphalt Section */}
+        {/* ... (keep existing new asphalt section code) ... */}
+
+        {/* Feature Grid */}
+        <ScrollSection className="py-2">
+          <div className="container mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {features.map((feature) => (
+                <MotionWrapper
+                  key={feature.title}
+                  motionTag="div"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative aspect-[4/3] overflow-hidden rounded-lg group"
+                >
+                  <Image
+                    src={feature.image}
+                    alt={`${feature.title} - ${feature.description} in Tulsa, Oklahoma`}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-2">
+                    <h3 className="text-2xl font-light tracking-tight mb-1 text-primary-foreground">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm font-light text-primary-foreground/70">
+                      {feature.description}
+                    </p>
+                  </div>
+                  <a href={`/services/${feature.title.toLowerCase().replace(' ', '-')}`} className="absolute inset-0 z-10">
+                    <span className="sr-only">Learn more about {feature.title} in Tulsa</span>
+                  </a>
+                </MotionWrapper>
+              ))}
+            </div>
+          </div>
+        </ScrollSection>
+
+        {/* Calculators Section */}
+        {/* ... (keep existing calculators section code) ... */}
+
+        {/* Testimonials Section */}
+        {/* ... (keep existing testimonials section code) ... */}
+
+        {/* Recent Blog Posts Section */}
+        {/* ... (keep existing recent blog posts section code) ... */}
+
+        {/* CTA Section */}
+        {/* ... (keep existing CTA section code) ... */}
+      </main>
+    </>
+  )
+        name="Alexis Concrete & Asphalt"
+        description="Premier concrete and asphalt solutions in Tulsa and surrounding Oklahoma areas"
+        telephone="+1-918-555-1234"
+        address={{
+          streetAddress: "123 Main St",
+          addressLocality: "Tulsa",
+          addressRegion: "OK",
+          postalCode: "74103"
+        }}
+        geo={{
+          latitude: 36.1540,
+          longitude: -95.9928
+        }}
+        url="https://www.alexisconcreteandasphalttulsa.com"
+        image="/images/alexis-logo-new.png"
+        priceRange="$$"
+        openingHours={[
+          "Mo-Fr 08:00-17:00",
+          "Sa 09:00-13:00"
+        ]}
+      />
+      <Script id="schema-services" type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": "Concrete and Asphalt Services",
+            "provider": {
+              "@type": "LocalBusiness",
+              "name": "Alexis Concrete & Asphalt"
+            },
+            "areaServed": ["Tulsa", "Norman", "Broken Arrow", "Oklahoma City"],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Concrete and Asphalt Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Concrete Services"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Asphalt Services"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Site Preparation & Excavation"
+                  }
+                }
+              ]
+            }
+          }
+        `}
+      </Script>
+      <main className="relative bg-background text-foreground">
       {/* Hero Section */}
       <div ref={heroRef} className="min-h-screen relative flex flex-col items-center justify-center overflow-hidden">
         <video
@@ -56,10 +291,10 @@ export default function Home() {
         >
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-[clamp(48px,8vw,120px)] font-extralight tracking-[-0.02em] text-primary-foreground leading-[0.9] md:leading-[0.85]">
-              Concrete & Asphalt<br />Experts in Tulsa
+              Tulsa's Premier<br />Concrete & Asphalt Experts
             </h1>
             <p className="mt-4 text-xl font-light text-primary-foreground/80">
-              Premier concrete and asphalt solutions for Tulsa and surrounding areas
+              Top-quality concrete and asphalt solutions for Tulsa, Norman, Broken Arrow, and surrounding Oklahoma areas
             </p>
           </div>
         </MotionWrapper>
@@ -93,10 +328,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div className="space-y-2">
               <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary">
-                Premium Concrete Solutions in Tulsa
+                <a href="/services/concrete" className="hover:underline">Premium Concrete Solutions in Tulsa</a>
               </h2>
               <p className="text-xl font-light text-muted-foreground">
-                Looking for top-notch concrete services in Tulsa? We specialize in premium concrete solutions, including driveways, patios, foundations, and more. With years of experience and a commitment to quality, we deliver durable, beautiful results tailored to your needs.
+                Looking for top-notch concrete services in Tulsa? We specialize in premium concrete solutions, including <a href="/services/concrete/driveways" className="text-primary hover:underline">driveways</a>, <a href="/services/concrete/patios" className="text-primary hover:underline">patios</a>, <a href="/services/concrete/foundations" className="text-primary hover:underline">foundations</a>, and more. With years of experience and a commitment to quality, we deliver durable, beautiful results tailored to your needs.
               </p>
               <ul className="list-disc list-inside text-lg font-light text-muted-foreground">
                 <li>Expert concrete pouring and finishing</li>
@@ -113,10 +348,13 @@ export default function Home() {
             >
               <Image
                 src="/images/alexis-concrete-pours2.jpg"
-                alt="Professional concrete pouring process in Tulsa"
+                alt="Expert concrete pouring process by Alexis Concrete & Asphalt for premium solutions in Tulsa, Oklahoma"
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-110"
               />
+              <a href="/services/concrete" className="absolute inset-0 z-10">
+                <span className="sr-only">Learn more about our concrete services in Tulsa</span>
+              </a>
             </MotionWrapper>
           </div>
         </div>
@@ -134,17 +372,20 @@ export default function Home() {
             >
               <Image
                 src="/images/alexis-concrete-footings.jpg"
-                alt="Concrete footings for a new construction project in Tulsa"
+                alt="Professional site preparation and concrete footings by Alexis Concrete & Asphalt in Tulsa, Oklahoma"
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-110"
               />
+              <a href="/services/site-preparation" className="absolute inset-0 z-10">
+                <span className="sr-only">Learn more about our site preparation services in Tulsa</span>
+              </a>
             </MotionWrapper>
             <div className="space-y-2">
               <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary">
-                Site Preparation & Excavation
+                <a href="/services/site-preparation" className="hover:underline">Site Preparation & Excavation</a>
               </h2>
               <p className="text-xl font-light text-secondary-foreground/70">
-                From initial groundwork to final grading, our fleet of modern equipment and skilled operators ensure your project starts with a solid foundation. Start your project on the right foundation with our professional site preparation and excavation services in Tulsa, OK.
+                From initial <a href="/services/site-preparation/groundwork" className="text-primary hover:underline">groundwork</a> to final <a href="/services/site-preparation/grading" className="text-primary hover:underline">grading</a>, our fleet of modern equipment and skilled operators ensure your project starts with a solid foundation. Start your project on the right foundation with our professional site preparation and excavation services in Tulsa, OK.
               </p>
               <ul className="list-disc list-inside text-lg font-light text-secondary-foreground/70">
                 <li>Precise land clearing and grading</li>
@@ -163,10 +404,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
             <div className="space-y-2">
               <h2 className="text-4xl md:text-6xl font-light tracking-tight text-primary">
-                Tulsa Asphalt Experts
+                <a href="/services/asphalt" className="hover:underline">Tulsa Asphalt Experts</a>
               </h2>
               <p className="text-xl font-light text-muted-foreground">
-                As Tulsa's premier asphalt contractors, we deliver top-quality asphalt solutions for driveways, parking lots, and roadways. Our expertise in asphalt paving, repair, and maintenance ensures long-lasting, smooth surfaces that withstand Tulsa's diverse weather conditions.
+                As Tulsa's premier asphalt contractors, we deliver top-quality asphalt solutions for <a href="/services/asphalt/driveways" className="text-primary hover:underline">driveways</a>, <a href="/services/asphalt/parking-lots" className="text-primary hover:underline">parking lots</a>, and <a href="/services/asphalt/roadways" className="text-primary hover:underline">roadways</a>. Our expertise in asphalt paving, repair, and maintenance ensures long-lasting, smooth surfaces that withstand Tulsa's diverse weather conditions.
               </p>
               <ul className="list-disc list-inside text-lg font-light text-muted-foreground">
                 <li>Professional asphalt paving and resurfacing</li>
@@ -183,10 +424,13 @@ export default function Home() {
             >
               <Image
                 src="/images/alexis-asphalt-paving.jpg"
-                alt="Professional asphalt paving in Tulsa"
+                alt="Expert asphalt paving services by Alexis Concrete & Asphalt in Tulsa, Oklahoma"
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-110"
               />
+              <a href="/services/asphalt" className="absolute inset-0 z-10">
+                <span className="sr-only">Learn more about our asphalt paving services in Tulsa</span>
+              </a>
             </MotionWrapper>
           </div>
         </div>
@@ -206,7 +450,7 @@ export default function Home() {
               >
                 <Image
                   src={feature.image}
-                  alt={feature.title}
+                  alt={`${feature.title} - ${feature.description} in Tulsa, Oklahoma`}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -219,6 +463,9 @@ export default function Home() {
                     {feature.description}
                   </p>
                 </div>
+                <a href={`/services/${feature.title.toLowerCase().replace(' ', '-')}`} className="absolute inset-0 z-10">
+                  <span className="sr-only">Learn more about {feature.title} in Tulsa</span>
+                </a>
               </MotionWrapper>
             ))}
           </div>
@@ -297,7 +544,11 @@ export default function Home() {
   )
 }
 
-const features = [
+const features: Array<{
+  title: string;
+  description: string;
+  image: string;
+}> = [
   {
     title: 'Commercial Projects',
     description: 'Comprehensive concrete and asphalt solutions for Tulsa businesses and organizations.',
@@ -313,4 +564,4 @@ const features = [
     description: 'Durable concrete and asphalt solutions for industrial applications in Tulsa.',
     image: '/images/alexis-industriall-concrete 1.jpeg',
   },
-]
+];
