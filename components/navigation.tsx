@@ -50,13 +50,10 @@ const menuItems: MenuItem[] = [
       { name: 'Gravel Calculator', href: '/resources/gravel-calculator', icon: 'gravel' },
     ],
   },
-  {
-    name: 'Contact',
-    items: [
-      { name: 'Contact Us', href: '/contact', icon: 'technical' },
-    ],
-  },
 ]
+
+const blogMenuItem = { name: 'Blog', href: '/blog', icon: 'technical' };
+const contactMenuItem = { name: 'Contact', href: '/contact', icon: 'technical' };
 
 export function Navigation() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null)
@@ -141,9 +138,9 @@ export function Navigation() {
                   </button>
                   <MotionWrapper
                     initial={{ opacity: 0, y: 10 }}
-                    animate={{ 
+                    animate={{
                       opacity: activeMenu === item.name ? 1 : 0,
-                      y: activeMenu === item.name ? 0 : 10 
+                      y: activeMenu === item.name ? 0 : 10
                     }}
                     transition={{ duration: 0.3 }}
                     className="absolute right-0 top-full pt-2"
@@ -181,6 +178,26 @@ export function Navigation() {
                   </MotionWrapper>
                 </div>
               ))}
+              <Link
+                href={blogMenuItem.href}
+                className={`text-xl font-bold tracking-wide uppercase ${
+                  isScrolled || isMobileMenuOpen
+                    ? 'text-primary-foreground hover:text-primary-foreground'
+                    : 'text-secondary hover:text-secondary'
+                } transition-colors`}
+              >
+                {blogMenuItem.name}
+              </Link>
+              <Link
+                href={contactMenuItem.href}
+                className={`text-xl font-bold tracking-wide uppercase ${
+                  isScrolled || isMobileMenuOpen
+                    ? 'text-primary-foreground hover:text-primary-foreground'
+                    : 'text-secondary hover:text-secondary'
+                } transition-colors`}
+              >
+                {contactMenuItem.name}
+              </Link>
             </div>
           </div>
 
@@ -270,6 +287,20 @@ export function Navigation() {
                       </motion.div>
                     </div>
                   ))}
+                  <Link
+                    href={blogMenuItem.href}
+                    className="text-3xl font-bold tracking-wide uppercase mb-6 text-primary-foreground hover:text-primary-foreground/80 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {blogMenuItem.name}
+                  </Link>
+                  <Link
+                    href={contactMenuItem.href}
+                    className="text-3xl font-bold tracking-wide uppercase mb-6 text-primary-foreground hover:text-primary-foreground/80 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {contactMenuItem.name}
+                  </Link>
                 </motion.div>
               </div>
             </motion.div>
