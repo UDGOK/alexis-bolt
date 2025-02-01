@@ -1,41 +1,37 @@
-'use client'
+import React from 'react';
+import Image from 'next/image';
 
-import { useRef, useEffect } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-
-interface ParallaxSectionProps {
-  children: React.ReactNode
-  bgImage: string
-  overlayColor?: string
+export interface ParallaxSectionProps {
+  imageUrl?: string;
+  bgImage?: string;
+  height?: string;
+  overlayContent?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-export function ParallaxSection({ children, bgImage, overlayColor = 'rgba(0, 0, 0, 0.5)' }: ParallaxSectionProps) {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+export const ParallaxSection: React.FC<ParallaxSectionProps> = ({
+  imageUrl,
+  bgImage,
+  height = '100vh',
+  overlayContent,
+  children
+}) => {
+  const backgroundImage = imageUrl || bgImage;
 
   return (
-    <section ref={ref} className="relative overflow-hidden min-h-screen flex items-center justify-center">
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          y
-        }}
-      />
-      <div
-        className="absolute inset-0 z-10"
-        style={{ backgroundColor: overlayColor }}
-      />
-      <div className="relative z-20 container mx-auto px-6">
-        {children}
+    <div className="relative" style={{ height }}>
+      <div className="absolute inset-0">
+        <Image
+          src={backgroundImage || ''}
+          alt="Parallax background"
+          fill
+          style={{ objectFit: 'cover' }}
+          quality={100}
+        />
       </div>
-    </section>
-  )
-}
+      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        {overlayContent || children}
+      </div>
+    </div>
+  );
+};

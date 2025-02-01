@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ParallaxSection } from '@/components/parallax-section';
+import { ParallaxSection, ParallaxSectionProps } from '@/components/parallax-section';
 
 const services = [
   { title: "Land Clearing & Site Preparation", description: "Preparing your land for construction or landscaping is our specialty. We remove trees, debris, and obstacles to create a clean slate for your project in Tulsa and surrounding areas.", image: "/images/alexis-concrete-footings.jpg" },
