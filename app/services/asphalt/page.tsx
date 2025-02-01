@@ -1,13 +1,111 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef, useState } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { MotionWrapper } from '@/components/motion-wrapper'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
+import Head from 'next/head'
+
+const features = [
+  {
+    title: "Asphalt Paving",
+    description: "Expert asphalt paving for driveways and parking lots, delivering long-lasting results for both residential and commercial properties.",
+    image: "/images/asphalt-paving.jpg"
+  },
+  {
+    title: "Asphalt Sealcoating",
+    description: "Protect your asphalt surfaces from sun damage, rain, and wear and tear with our professional sealcoating services.",
+    image: "/images/tulsa-sealcoating.jpg"
+  },
+  {
+    title: "Asphalt Repairs",
+    description: "Quick and effective repairs for cracks, potholes, and other damage to asphalt surfaces, ensuring safety and longevity.",
+    image: "/images/tulsa-repair-and patching.jpg"
+  },
+  {
+    title: "Parking Lot Striping",
+    description: "Professional line striping and marking services for parking lots, ensuring safety, organization, and compliance with local regulations.",
+    image: "/images/tulsa-parking-lot-striping.jpg"
+  },
+]
+
+const services = [
+  {
+    title: "Asphalt Paving",
+    shortDescription: "Expert paving for driveways, parking lots, and commercial spaces.",
+    longDescription: "Our professional asphalt paving services in Tulsa, Bixby, Oklahoma City, Jenks, Weatherford, and Owasso deliver durable, smooth surfaces for driveways, parking lots, and commercial spaces. We use high-quality materials and advanced techniques to ensure long-lasting results that enhance property value and curb appeal.",
+    image: "/images/asphalt-paving.jpg"
+  },
+  {
+    title: "Sealcoating",
+    shortDescription: "Protect and extend the life of your asphalt surfaces.",
+    longDescription: "Our sealcoating services in Tulsa and surrounding areas provide a protective layer that shields your asphalt from UV rays, water damage, and chemical spills. This cost-effective treatment extends the life of your pavement by up to 30%, saving you money on repairs and replacements in the long run.",
+    image: "/images/tulsa-sealcoating.jpg"
+  },
+  {
+    title: "Repairs & Patching",
+    shortDescription: "Quick and effective repairs for cracks, potholes, and other damage.",
+    longDescription: "We offer prompt and efficient asphalt repair and patching services throughout Tulsa, Bixby, Oklahoma City, Jenks, Weatherford, and Owasso. Our team quickly addresses cracks, potholes, and surface damage to prevent further deterioration and ensure a safe, smooth driving surface for your property.",
+    image: "/images/tulsa-repair-and-patching.jpg"
+  },
+  {
+    title: "Crack Filling",
+    shortDescription: "Seal gaps to prevent water infiltration and further deterioration.",
+    longDescription: "Our crack filling services in Tulsa and nearby cities target and seal asphalt cracks before they develop into more serious issues. This preventive measure stops water infiltration, which can cause extensive damage to your asphalt surface, especially during freeze-thaw cycles common in Oklahoma.",
+    image: "/images/tulsa-crack-filling.jpg"
+  },
+  {
+    title: "Parking Lot Striping",
+    shortDescription: "Professional line striping and marking for safe, organized parking lots.",
+    longDescription: "We provide expert parking lot striping services in Tulsa, Bixby, Oklahoma City, Jenks, Weatherford, and Owasso to ensure your lot is safe, organized, and compliant with local regulations. Our precise markings maximize parking efficiency and improve traffic flow, enhancing the overall functionality of your property.",
+    image: "/images/tulsa-parking-lot-striping.jpg"
+  },
+  {
+    title: "Asphalt Resurfacing",
+    shortDescription: "Restore smoothness and durability without full replacement.",
+    longDescription: "Our asphalt resurfacing services offer a cost-effective solution for worn or damaged surfaces in Tulsa and surrounding areas. By applying a new layer of asphalt over the existing surface, we can restore smoothness and durability without the need for a full replacement, saving you time and money.",
+    image: "/images/tulsa-asphalt-resurfacing.jpg"
+  },
+  {
+    title: "New Construction",
+    shortDescription: "Expert asphalt installation for new construction projects.",
+    longDescription: "For new construction projects in Tulsa, Bixby, Oklahoma City, Jenks, Weatherford, and Owasso, our team provides expert asphalt installation services. We work closely with contractors and property owners to ensure high-quality, durable asphalt surfaces that meet project specifications and local building codes.",
+    image: "/images/new-construction.jpg"
+  },
+  {
+    title: "Industrial Services",
+    shortDescription: "Heavy-duty asphalt solutions for industrial properties.",
+    longDescription: "Our industrial asphalt services cater to the unique needs of manufacturing facilities, warehouses, and other industrial properties in Tulsa and nearby cities. We provide heavy-duty asphalt solutions designed to withstand heavy traffic, equipment loads, and chemical exposure common in industrial settings.",
+    image: "/images/industrial-services.jpg"
+  },
+  {
+    title: "Maintenance Programs",
+    shortDescription: "Routine care to keep your asphalt surfaces in top condition.",
+    longDescription: "We offer comprehensive asphalt maintenance programs for properties in Tulsa, Bixby, Oklahoma City, Jenks, Weatherford, and Owasso. Our proactive approach includes regular inspections, cleaning, minor repairs, and treatments to extend the life of your asphalt and prevent costly replacements.",
+    image: "/images/maintenance-programs.jpg"
+  },
+  {
+    title: "ADA Compliance",
+    shortDescription: "Ensure your property meets ADA requirements for accessible parking.",
+    longDescription: "Our ADA compliance services help property owners in Tulsa and surrounding areas meet federal and state accessibility requirements. We provide expert consultation and implementation of ADA-compliant parking spaces, ramps, and signage to ensure your property is accessible to all visitors.",
+    image: "/images/ada-compliance.jpg"
+  },
+  {
+    title: "Asphalt Inspections",
+    shortDescription: "Professional evaluations to identify and address potential issues.",
+    longDescription: "Our thorough asphalt inspection services in Tulsa, Bixby, Oklahoma City, Jenks, Weatherford, and Owasso help property owners identify potential issues before they become major problems. Our experts assess the condition of your asphalt surfaces and provide detailed reports with recommendations for maintenance or repairs.",
+    image: "/images/asphalt-inspections.jpg"
+  }
+]
 
 export default function AsphaltServicesPage() {
+  const pageTitle = "Comprehensive Asphalt Services in Tulsa, OK | Expert Paving & Maintenance"
+  const pageDescription = "Professional asphalt paving, sealcoating, repairs, and maintenance services in Tulsa and surrounding areas. Get long-lasting results for your driveway or parking lot."
+
+  const [expandedService, setExpandedService] = useState<string | null>(null);
+
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -24,8 +122,8 @@ export default function AsphaltServicesPage() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y1 }} className="absolute inset-0 z-0">
           <Image
-            src="/images/tulsa-concrete-projects.jpeg"
-            alt="Professional asphalt paving in progress"
+            src="/images/asphalt-paving.jpg"
+            alt="Professional asphalt paving crew working on a commercial parking lot in Tulsa"
             fill
             className="object-cover"
           />
@@ -33,10 +131,10 @@ export default function AsphaltServicesPage() {
         </motion.div>
         <div className="relative z-10 text-center px-4">
           <h1 className="text-6xl md:text-8xl font-extralight tracking-tight mb-6">
-            Asphalt Services
+            Comprehensive Asphalt Services
           </h1>
           <p className="text-xl md:text-2xl font-light text-white/70 max-w-3xl mx-auto">
-            Delivering excellence in asphalt paving and maintenance with cutting-edge technology and expert craftsmanship in Tulsa and surrounding areas
+            Expert asphalt solutions for driveways, parking lots, and more in Tulsa, OK, and surrounding areas
           </p>
         </div>
       </section>
@@ -81,8 +179,8 @@ export default function AsphaltServicesPage() {
       <section className="relative h-[50vh] md:h-[80vh] overflow-hidden">
         <motion.div style={{ y: y2 }} className="absolute inset-0">
           <Image
-            src="/images/alexis-concrete-footings.jpg"
-            alt="Completed asphalt parking lot"
+            src="/images/tulsa-parking-lot-striping.jpg"
+            alt="Freshly paved and striped asphalt parking lot in Tulsa, showcasing our quality work"
             fill
             className="object-cover"
           />
@@ -104,17 +202,68 @@ export default function AsphaltServicesPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative p-6 rounded-2xl bg-white/5"
+                className="relative p-6 rounded-2xl bg-white/5 cursor-pointer"
+                onClick={() => setExpandedService(expandedService === service.title ? null : service.title)}
               >
                 <h3 className="text-2xl font-light tracking-tight mb-4">
                   {service.title}
                 </h3>
                 <p className="text-white/70 font-light">
-                  {service.description}
+                  {service.shortDescription}
                 </p>
+                <AnimatePresence>
+                  {expandedService === service.title && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4"
+                    >
+                      <Image
+                        src={service.image}
+                        alt={`${service.title} in Tulsa and surrounding areas`}
+                        width={400}
+                        height={300}
+                        className="rounded-lg mb-4"
+                      />
+                      <p className="text-white/70 font-light">{service.longDescription}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </MotionWrapper>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-24 px-4 bg-white/5">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-extralight tracking-tight mb-8">
+            Why Choose Us
+          </h2>
+          <p className="text-xl font-light text-white/70 mb-8">
+            With years of experience, high-grade materials, and a commitment to customer satisfaction, we deliver reliable asphalt services at fair pricing. Whether it's a small driveway or a large commercial parking lot, we treat every project with the same level of care and professionalism.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a href="/services/concrete" className="text-white hover:text-blue-400 underline">Concrete Services</a>
+            <a href="/services/resurfacing" className="text-white hover:text-blue-400 underline">Resurfacing Services</a>
+            <a href="/resources/asphalt-calculator" className="text-white hover:text-blue-400 underline">Asphalt Calculator</a>
+            <a href="/resources/faq" className="text-white hover:text-blue-400 underline">FAQs</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Service Areas Section */}
+      <section className="py-24 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-extralight tracking-tight mb-8">
+            Service Areas
+          </h2>
+          <p className="text-xl font-light text-white/70 mb-12">
+            We proudly serve Tulsa, Bixby, Oklahoma City, Jenks, Weatherford, Owasso, and surrounding areas.
+          </p>
         </div>
       </section>
 
@@ -122,8 +271,8 @@ export default function AsphaltServicesPage() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y3 }} className="absolute inset-0 z-0">
           <Image
-            src="/images/alexis-concrete-splash.jpg"
-            alt="Asphalt repair and maintenance"
+            src="/images/tulsa-repair-and-patching.jpg"
+            alt="Asphalt repair and maintenance crew working on a residential driveway in Tulsa"
             fill
             className="object-cover"
           />
@@ -140,64 +289,41 @@ export default function AsphaltServicesPage() {
             whileTap={{ scale: 0.95 }}
             className="inline-block bg-white text-black px-8 py-4 rounded-full text-lg font-light tracking-tight"
           >
-            Get in Touch
+            Get a Free Estimate
           </MotionWrapper>
         </div>
       </section>
+
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Alexis Asphalt Services",
+            "image": "https://www.alexisasphalt.com/images/alexis-asphalt-paving.jpg",
+            "description": "Expert asphalt paving, sealcoating, repairs, and maintenance services in Tulsa and surrounding areas.",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "123 Main St",
+              "addressLocality": "Tulsa",
+              "addressRegion": "OK",
+              "postalCode": "74103",
+              "addressCountry": "US"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 36.1540,
+              "longitude": -95.9928
+            },
+            "url": "https://www.alexisasphalt.com/services/asphalt",
+            "telephone": "+1-918-555-1234",
+            "openingHours": "Mo-Fr 08:00-17:00",
+            "priceRange": "$$"
+          })
+        }}
+      />
     </main>
   )
 }
-
-const features = [
-  {
-    title: "Commercial Paving",
-    description: "Expert asphalt solutions for parking lots, driveways, and commercial spaces in Tulsa. Built to last with premium materials and precision.",
-    image: "/images/alexis-commercial-concrete 1.jpeg"
-  },
-  {
-    title: "Road Construction",
-    description: "Comprehensive road construction services in Tulsa with a focus on durability and safety, including highway construction and street paving.",
-    image: "/images/tulsa-concrete-projects.jpeg"
-  },
-  {
-    title: "Asphalt Maintenance",
-    description: "Proactive maintenance services to extend the life of your asphalt surfaces in Tulsa, including sealcoating and crack filling.",
-    image: "/images/alexis-concrete-footings3.jpg"
-  },
-  {
-    title: "Residential Asphalt",
-    description: "High-quality asphalt solutions for residential driveways and pathways in Tulsa, enhancing curb appeal and functionality.",
-    image: "/images/alexis-residential-concrete 1.jpeg"
-  },
-]
-
-const services = [
-  {
-    title: "Parking Lots",
-    description: "Complete parking lot construction and maintenance services for commercial properties in Tulsa."
-  },
-  {
-    title: "Road Paving",
-    description: "Professional road paving services for public and private projects throughout Tulsa and surrounding areas."
-  },
-  {
-    title: "Maintenance",
-    description: "Regular maintenance and repair services to extend pavement life in Tulsa's challenging climate."
-  },
-  {
-    title: "Sealcoating",
-    description: "Protective sealcoating services to prevent damage and extend longevity of asphalt surfaces in Tulsa."
-  },
-  {
-    title: "Striping",
-    description: "Professional line striping and marking services for parking lots and roads in Tulsa, ensuring safety and compliance."
-  },
-  {
-    title: "Repairs",
-    description: "Quick and effective repairs for cracks, potholes, and other damage to asphalt surfaces in Tulsa."
-  },
-  {
-    title: "Asphalt Sealing",
-    description: "Expert asphalt sealing services to protect and extend the life of your asphalt surfaces. Our crew is ready to start in 1 week."
-  }
-]

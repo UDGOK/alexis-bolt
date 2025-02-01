@@ -6,6 +6,7 @@ import { AnnouncementBanner } from "../components/announcement-banner"
 import { LocalBusinessSchema } from "../components/local-business-schema"
 import { validateEnv } from './lib/env'
 import { Metadata } from 'next'
+import { CookieConsentBanner } from "../components/cookie-consent"
 
 const locations = [
   'Tulsa', 'Bixby', 'Owasso', 'Stillwater', 'Jenks', 'Enid', 'Broken Arrow', 'Haskell'
@@ -75,6 +76,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <CookieConsentBanner />
       </body>
     </html>
   )
