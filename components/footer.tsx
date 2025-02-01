@@ -129,6 +129,9 @@ export function Footer() {
                 <Link href="/resources/concrete-calculator" className="text-[15px] text-[#999999] hover:text-white transition-colors">
                   Concrete Calculator
                 </Link>
+                <Link href="/resources/asphalt-calculator" className="text-[15px] text-[#999999] hover:text-white transition-colors">
+                  Asphalt Calculator
+                </Link>
                 <Link href="/resources/rebar-calculator" className="text-[15px] text-[#999999] hover:text-white transition-colors">
                   Rebar Calculator
                 </Link>

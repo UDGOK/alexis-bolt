@@ -4,66 +4,46 @@ import { useState } from 'react'
 import { PrintableResult } from '@/components/printable-result'
 import { createRoot } from 'react-dom/client'
 
-const gravelTypes = [
-  { name: 'Pea Gravel', density: 1.5 },
-  { name: 'Crushed Stone', density: 1.6 },
-  { name: 'River Rock', density: 1.7 },
-  { name: 'Limestone', density: 1.4 },
-  { name: 'Granite', density: 1.5 },
-]
-
-export default function GravelCalculatorPage() {
+export default function AsphaltCalculatorPage() {
   const [length, setLength] = useState('')
   const [width, setWidth] = useState('')
   const [depth, setDepth] = useState('')
-  const [gravelType, setGravelType] = useState('Pea Gravel')
   const [unit, setUnit] = useState('imperial')
   const [result, setResult] = useState<{
+    area: number;
     volume: number;
-    weightTons: number;
-    truckLoads: {
-      small: number;
-      medium: number;
-      large: number;
-    };
+    weight: number;
   } | null>(null)
 
-  const calculateGravel = (e: React.FormEvent<HTMLFormElement>) => {
+  const calculateAsphalt = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    let area = 0
     let volume = 0
-    let weightTons = 0
+    let weight = 0
 
     const convert = (value: string) => {
       const num = parseFloat(value)
       return unit === 'metric' ? num : num * 0.3048 // Convert feet to meters
     }
 
-    const lengthM = convert(length)
-    const widthM = convert(width)
-    const depthM = convert(depth) / (unit === 'imperial' ? 12 : 100) // Convert inches/cm to meters
-
-    volume = lengthM * widthM * depthM
-    const selectedGravel = gravelTypes.find(g => g.name === gravelType)
-    weightTons = volume * (selectedGravel?.density || 1.5) // Metric tons
+    area = convert(length) * convert(width)
+    volume = area * (convert(depth) / 100) // depth is in cm or inches, convert to meters
+    weight = volume * 2400 // Asphalt density is approximately 2400 kg/m3
 
     if (unit === 'imperial') {
+      area = area * 10.7639 // Convert m2 to ft2
       volume = volume * 35.3147 // Convert m3 to ft3
+      weight = weight * 2.20462 // Convert kg to lbs
     }
 
-    const truckLoads = {
-      small: weightTons / 13, // 13-ton truck (10-wheeler)
-      medium: weightTons / 20, // 20-ton truck
-      large: weightTons / 25, // 25-ton truck (large flatbed)
-    }
-
-    setResult({ volume, weightTons, truckLoads })
+    setResult({ area, volume, weight })
   }
 
   const handlePrint = () => {
     if (result) {
       const printWindow = window.open('', '_blank')
       if (printWindow) {
-        printWindow.document.write('<html><head><title>Gravel Calculator Result</title>')
+        printWindow.document.write('<html><head><title>Asphalt Calculator Result</title>')
         printWindow.document.write(`
           <style>
             body { font-family: Arial, sans-serif; }
@@ -85,15 +65,12 @@ export default function GravelCalculatorPage() {
           const root = createRoot(printContainer)
           root.render(
             <PrintableResult
-              title="Gravel Calculator Result"
+              title="Asphalt Calculator Result"
               results={[
-                { label: 'Gravel Type', value: gravelType },
                 { label: 'Unit System', value: unit === 'imperial' ? 'US (feet, inches)' : 'Metric (meters, cm)' },
+                { label: 'Area', value: `${result.area.toFixed(2)} ${unit === 'imperial' ? 'ft2' : 'm2'}` },
                 { label: 'Volume', value: `${result.volume.toFixed(2)} ${unit === 'imperial' ? 'ft3' : 'm3'}` },
-                { label: 'Weight', value: `${result.weightTons.toFixed(2)} tons` },
-                { label: '13-ton Truck Loads', value: `${Math.ceil(result.truckLoads.small)}` },
-                { label: '20-ton Truck Loads', value: `${Math.ceil(result.truckLoads.medium)}` },
-                { label: '25-ton Truck Loads', value: `${Math.ceil(result.truckLoads.large)}` },
+                { label: 'Weight', value: `${result.weight.toFixed(2)} ${unit === 'imperial' ? 'lbs' : 'kg'}` },
               ]}
             />
           )
@@ -109,27 +86,10 @@ export default function GravelCalculatorPage() {
   return (
     <main className="bg-gradient-to-br from-gray-900 to-black text-white min-h-screen">
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-6xl font-bold mb-12 text-center text-orange-500">Gravel Calculator</h1>
+        <h1 className="text-6xl font-bold mb-12 text-center text-orange-500">Asphalt Calculator</h1>
         <div className="max-w-2xl mx-auto bg-gray-800 p-8 rounded-lg shadow-lg">
-          <form onSubmit={calculateGravel} className="space-y-6">
+          <form onSubmit={calculateAsphalt} className="space-y-6">
             <div className="grid grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="gravelType" className="block text-lg font-semibold text-orange-300 mb-2">
-                  Gravel Type
-                </label>
-                <select
-                  id="gravelType"
-                  value={gravelType}
-                  onChange={(e) => setGravelType(e.target.value)}
-                  className="w-full px-4 py-3 rounded-md bg-gray-700 border-2 border-orange-500 text-white text-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                >
-                  {gravelTypes.map((gravel) => (
-                    <option key={gravel.name} value={gravel.name}>
-                      {gravel.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
               <div>
                 <label htmlFor="unit" className="block text-lg font-semibold text-orange-300 mb-2">
                   Unit
@@ -145,7 +105,7 @@ export default function GravelCalculatorPage() {
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label htmlFor="length" className="block text-lg font-semibold text-orange-300 mb-2">
                   Length ({unit === 'imperial' ? 'feet' : 'meters'})
@@ -197,11 +157,9 @@ export default function GravelCalculatorPage() {
             <div className="mt-8 p-6 bg-gray-700 rounded-lg border-2 border-orange-500">
               <h2 className="text-2xl font-bold text-center text-orange-300 mb-4">Results</h2>
               <div className="space-y-2">
+                <p className="text-lg"><strong>Area:</strong> {result.area.toFixed(2)} {unit === 'imperial' ? 'ft2' : 'm2'}</p>
                 <p className="text-lg"><strong>Volume:</strong> {result.volume.toFixed(2)} {unit === 'imperial' ? 'ft3' : 'm3'}</p>
-                <p className="text-lg"><strong>Weight:</strong> {result.weightTons.toFixed(2)} tons</p>
-                <p className="text-lg"><strong>13-ton Truck Loads:</strong> {Math.ceil(result.truckLoads.small)}</p>
-                <p className="text-lg"><strong>20-ton Truck Loads:</strong> {Math.ceil(result.truckLoads.medium)}</p>
-                <p className="text-lg"><strong>25-ton Truck Loads:</strong> {Math.ceil(result.truckLoads.large)}</p>
+                <p className="text-lg"><strong>Weight:</strong> {result.weight.toFixed(2)} {unit === 'imperial' ? 'lbs' : 'kg'}</p>
               </div>
               <button
                 onClick={handlePrint}

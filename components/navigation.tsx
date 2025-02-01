@@ -32,6 +32,7 @@ const menuItems = [
       { name: 'FAQ', href: '/resources/faq', icon: <HelpCircle className="w-5 h-5" /> },
       { name: 'Technical', href: '/resources/technical', icon: <FileText className="w-5 h-5" /> },
       { name: 'Concrete Calculator', href: '/resources/concrete-calculator', icon: <FileText className="w-5 h-5" /> },
+      { name: 'Asphalt Calculator', href: '/resources/asphalt-calculator', icon: <FileText className="w-5 h-5" /> },
       { name: 'Rebar Calculator', href: '/resources/rebar-calculator', icon: <FileText className="w-5 h-5" /> },
       { name: 'Gravel Calculator', href: '/resources/gravel-calculator', icon: <FileText className="w-5 h-5" /> },
     ],

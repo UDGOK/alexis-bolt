@@ -2,13 +2,33 @@
   "node": {
     "403a111db9deaa31dfe9345fe7bc41717123babb5e": {
       "workers": {
-        "app/page": {
+        "app/resources/concrete-calculator/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CYasir%5C%5CDesktop%5C%5Calexis-bolt%5C%5Capp%5C%5Cactions.ts%22%2C%5B%5B%22403a111db9deaa31dfe9345fe7bc41717123babb5e%22%2C%22subscribeToNewsletter%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/_not-found/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CYasir%5C%5CDesktop%5C%5Calexis-bolt%5C%5Capp%5C%5Cactions.ts%22%2C%5B%5B%22403a111db9deaa31dfe9345fe7bc41717123babb5e%22%2C%22subscribeToNewsletter%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/resources/asphalt-calculator/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CYasir%5C%5CDesktop%5C%5Calexis-bolt%5C%5Capp%5C%5Cactions.ts%22%2C%5B%5B%22403a111db9deaa31dfe9345fe7bc41717123babb5e%22%2C%22subscribeToNewsletter%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/resources/rebar-calculator/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CYasir%5C%5CDesktop%5C%5Calexis-bolt%5C%5Capp%5C%5Cactions.ts%22%2C%5B%5B%22403a111db9deaa31dfe9345fe7bc41717123babb5e%22%2C%22subscribeToNewsletter%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/resources/gravel-calculator/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CYasir%5C%5CDesktop%5C%5Calexis-bolt%5C%5Capp%5C%5Cactions.ts%22%2C%5B%5B%22403a111db9deaa31dfe9345fe7bc41717123babb5e%22%2C%22subscribeToNewsletter%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
-        "app/page": "action-browser"
+        "app/resources/concrete-calculator/page": "action-browser",
+        "app/_not-found/page": "action-browser",
+        "app/resources/asphalt-calculator/page": "action-browser",
+        "app/resources/rebar-calculator/page": "action-browser",
+        "app/resources/gravel-calculator/page": "action-browser"
       }
     }
   },
