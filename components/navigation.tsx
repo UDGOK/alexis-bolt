@@ -23,6 +23,7 @@ const menuItems = [
     items: [
       { name: 'About', href: '/about', icon: <Info className="w-5 h-5" /> },
       { name: 'Projects', href: '/projects', icon: <FileText className="w-5 h-5" /> },
+      { name: 'Media', href: '/company/media', icon: <ImageIcon className="w-5 h-5" /> },
       { name: 'Terms', href: '/terms', icon: <FileText className="w-5 h-5" /> },
     ],
   },

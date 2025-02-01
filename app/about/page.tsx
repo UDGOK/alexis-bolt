@@ -9,9 +9,9 @@ import { motion } from 'framer-motion'
 
 export default function AboutPage() {
   return (
-    <main className="bg-black text-white">
+    <main className="bg-gradient-to-b from-black to-gray-900 text-white">
       {/* Hero Section */}
-      <ParallaxSection bgImage="/images/hero-bg.jpg">
+      <ParallaxSection bgImage="/images/our-work-1.jpg">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -34,22 +34,24 @@ export default function AboutPage() {
 
       {/* Mission Section */}
       <ScrollSection>
-        <div className="container mx-auto px-6 py-24">
+        <div className="container mx-auto px-6 py-24 bg-orange-600">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <h2 className="text-3xl md:text-5xl font-light tracking-tight">
                 Our Mission
               </h2>
-              <p className="text-xl font-light text-white/70">
+              <p className="text-xl font-light text-white/90">
                 To revolutionize the construction industry through innovative solutions, sustainable practices, and unwavering commitment to quality. We aim to build not just structures, but a better future for communities.
               </p>
             </div>
-            <div className="relative aspect-square">
-              <Image
-                src="/images/mission.jpg"
-                alt="Innovative construction site"
-                fill
-                className="object-cover rounded-2xl"
+            <div className="relative aspect-video rounded-lg overflow-hidden">
+              <video
+                src="/videos/our-work-1.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
@@ -58,7 +60,7 @@ export default function AboutPage() {
 
       {/* Values Section */}
       <ScrollSection>
-        <div className="container mx-auto px-6 py-24">
+        <div className="container mx-auto px-6 py-24 bg-blue-700">
           <h2 className="text-3xl md:text-5xl font-light tracking-tight text-center mb-16">
             Our Core Values
           </h2>
@@ -70,7 +72,7 @@ export default function AboutPage() {
 
       {/* Team Section */}
       <ScrollSection>
-        <div className="container mx-auto px-6 py-24">
+        <div className="container mx-auto px-6 py-24 bg-gradient-to-r from-purple-800 to-indigo-800">
           <h2 className="text-3xl md:text-5xl font-light tracking-tight text-center mb-16">
             Meet Our Team
           </h2>
@@ -105,7 +107,7 @@ export default function AboutPage() {
       </ScrollSection>
 
       {/* History Section */}
-      <ParallaxSection bgImage="/images/history-bg.jpg">
+      <ParallaxSection bgImage="/images/our-work-2.jpg">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-light tracking-tight mb-12 text-center">
             Our Journey
@@ -119,7 +121,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center text-2xl font-light">
+                <div className="w-24 h-24 rounded-full bg-orange-500 flex items-center justify-center text-2xl font-light">
                   {event.year}
                 </div>
                 <div>
@@ -134,7 +136,7 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <ScrollSection>
-        <div className="container mx-auto px-6 py-24 text-center">
+        <div className="container mx-auto px-6 py-24 text-center bg-gradient-to-r from-green-600 to-teal-600">
           <h2 className="text-3xl md:text-5xl font-light tracking-tight mb-8">
             Ready to build the future together?
           </h2>
@@ -183,17 +185,17 @@ const team = [
   {
     name: "Francisco Rodriguez",
     role: "CEO & Founder",
-    image: "https://source.unsplash.com/featured/?construction,worker",
+    image: "/images/our-work-3.jpg",
   },
   {
     name: "Horay Rodriguez",
     role: "Operations Director",
-    image: "https://source.unsplash.com/featured/?engineer,woman",
+    image: "/images/our-work-4.jpg",
   },
   {
     name: "Kako (HULK)",
     role: "Technical Director",
-    image: "https://source.unsplash.com/featured/?construction,manager",
+    image: "/images/our-work-5.jpg",
   },
 ]
 

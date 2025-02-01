@@ -1,6 +1,6 @@
 {
-  "/resources/asphalt-calculator/page": "app/resources/asphalt-calculator/page.js",
-  "/resources/concrete-calculator/page": "app/resources/concrete-calculator/page.js",
-  "/resources/gravel-calculator/page": "app/resources/gravel-calculator/page.js",
-  "/resources/rebar-calculator/page": "app/resources/rebar-calculator/page.js"
+  "/page": "app/page.js",
+  "/services/concrete/page": "app/services/concrete/page.js",
+  "/company/media/page": "app/company/media/page.js",
+  "/about/page": "app/about/page.js"
 }
