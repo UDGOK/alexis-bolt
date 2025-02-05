@@ -18,7 +18,9 @@ export default function ConcreteCalculatorPage() {
   const [strength, setStrength] = useState('3000')
   const [wasteFactor, setWasteFactor] = useState('10')
   const [result, setResult] = useState<{
-    volume: number;
+    volumeCubicFeet: number;
+    volumeCubicYards: number;
+    volumeCubicMeters: number;
     bags: number;
     cement: number;
     sand: number;
@@ -27,42 +29,54 @@ export default function ConcreteCalculatorPage() {
 
   const calculateConcrete = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    let volume = 0
+    let volumeCubicFeet = 0
     const waste = 1 + parseInt(wasteFactor) / 100
 
     const convert = (value: string) => {
       const num = parseFloat(value)
-      return unit === 'metric' ? num / 0.3048 : num
+      return unit === 'metric' ? num * 3.28084 : num
     }
 
-    switch (shape) {
-      case 'rectangular':
-        volume = (convert(length) * convert(width) * convert(depth) / 12) / 27
-        break
-      case 'circular':
-        volume = (Math.PI * Math.pow(convert(diameter) / 2, 2) * convert(depth) / 12) / 27
-        break
-      case 'l-shaped':
-        volume = ((convert(length) * convert(width) + (convert(length) - convert(width)) * convert(width)) * convert(depth) / 12) / 27
-        break
-      case 'triangular':
-        volume = (0.5 * convert(length) * convert(width) * convert(depth) / 12) / 27
-        break
-      case 'stairs':
-        const stepVolume = (convert(length) * convert(stepWidth) * convert(stepHeight) / 12) / 27
-        volume = stepVolume * parseInt(steps)
-        break
+    const convertDepth = (value: string) => {
+      const num = parseFloat(value)
+      return unit === 'metric' ? num * 39.3701 : num
     }
 
-    volume *= waste
+    try {
+      switch (shape) {
+        case 'rectangular':
+          volumeCubicFeet = convert(length) * convert(width) * (convertDepth(depth) / 12)
+          break
+        case 'circular':
+          volumeCubicFeet = Math.PI * Math.pow(convert(diameter) / 2, 2) * (convertDepth(depth) / 12)
+          break
+        case 'l-shaped':
+          volumeCubicFeet = (convert(length) * convert(width) + (convert(length) - convert(width)) * convert(width)) * (convertDepth(depth) / 12)
+          break
+        case 'triangular':
+          volumeCubicFeet = 0.5 * convert(length) * convert(width) * (convertDepth(depth) / 12)
+          break
+        case 'stairs':
+          const stepVolume = convert(length) * (convert(stepWidth) / 12) * (convert(stepHeight) / 12)
+          volumeCubicFeet = stepVolume * parseInt(steps)
+          break
+      }
 
-    const strengthFactor = parseInt(strength) / 3000
-    const bags = Math.ceil(volume * 90 * strengthFactor)
-    const cement = volume * 5.8 * strengthFactor
-    const sand = volume * 17.4 * strengthFactor
-    const gravel = volume * 23.2 * strengthFactor
+      volumeCubicFeet *= waste
 
-    setResult({ volume, bags, cement, sand, gravel })
+      const volumeCubicYards = volumeCubicFeet / 27
+      const volumeCubicMeters = volumeCubicFeet / 35.3147
+
+      const bags = Math.ceil(volumeCubicYards * 40)
+      const cement = volumeCubicYards * 4.5
+      const sand = volumeCubicYards * 10
+      const gravel = volumeCubicYards * 12
+
+      setResult({ volumeCubicFeet, volumeCubicYards, volumeCubicMeters, bags, cement, sand, gravel })
+    } catch (error) {
+      console.error('Error in calculation:', error)
+      setResult(null)
+    }
   }
 
   const handlePrint = () => {
@@ -97,11 +111,13 @@ export default function ConcreteCalculatorPage() {
                 { label: 'Unit System', value: unit === 'imperial' ? 'US (feet, inches)' : 'Metric (meters, cm)' },
                 { label: 'Concrete Strength', value: `${strength} PSI` },
                 { label: 'Waste Factor', value: `${wasteFactor}%` },
-                { label: 'Volume', value: `${result.volume.toFixed(2)} cubic yards` },
-                { label: 'Bags of Concrete', value: `${result.bags} (60lb bags)` },
-                { label: 'Cement', value: `${result.cement.toFixed(2)} cubic yards` },
-                { label: 'Sand', value: `${result.sand.toFixed(2)} cubic yards` },
-                { label: 'Gravel', value: `${result.gravel.toFixed(2)} cubic yards` },
+                { label: 'Volume (cubic feet)', value: `${result.volumeCubicFeet.toFixed(2)}` },
+                { label: 'Volume (cubic yards)', value: `${result.volumeCubicYards.toFixed(2)}` },
+                { label: 'Volume (cubic meters)', value: `${result.volumeCubicMeters.toFixed(2)}` },
+                { label: 'Bags of Concrete', value: `${result.bags} (80lb bags)` },
+                { label: 'Cement', value: `${result.cement.toFixed(2)} cubic feet` },
+                { label: 'Sand', value: `${result.sand.toFixed(2)} cubic feet` },
+                { label: 'Gravel', value: `${result.gravel.toFixed(2)} cubic feet` },
               ]}
             />
           )
@@ -300,11 +316,13 @@ export default function ConcreteCalculatorPage() {
             <div className="mt-8 p-6 bg-gray-700 rounded-lg border-2 border-orange-500">
               <h2 className="text-2xl font-bold text-center text-orange-300 mb-4">Results</h2>
               <div className="space-y-2">
-                <p className="text-lg"><strong>Volume:</strong> {result.volume.toFixed(2)} cubic yards</p>
-                <p className="text-lg"><strong>Bags of Concrete:</strong> {result.bags} (60lb bags)</p>
-                <p className="text-lg"><strong>Cement:</strong> {result.cement.toFixed(2)} cubic yards</p>
-                <p className="text-lg"><strong>Sand:</strong> {result.sand.toFixed(2)} cubic yards</p>
-                <p className="text-lg"><strong>Gravel:</strong> {result.gravel.toFixed(2)} cubic yards</p>
+                <p className="text-lg"><strong>Volume:</strong> {result.volumeCubicFeet.toFixed(2)} cubic feet</p>
+                <p className="text-lg">or {result.volumeCubicYards.toFixed(2)} cubic yards</p>
+                <p className="text-lg">or {result.volumeCubicMeters.toFixed(2)} cubic meters</p>
+                <p className="text-lg"><strong>Bags of Concrete:</strong> {result.bags} (80lb bags)</p>
+                <p className="text-lg"><strong>Cement:</strong> {result.cement.toFixed(2)} cubic feet</p>
+                <p className="text-lg"><strong>Sand:</strong> {result.sand.toFixed(2)} cubic feet</p>
+                <p className="text-lg"><strong>Gravel:</strong> {result.gravel.toFixed(2)} cubic feet</p>
               </div>
               <button
                 onClick={handlePrint}
