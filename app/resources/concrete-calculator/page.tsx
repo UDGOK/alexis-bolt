@@ -21,10 +21,10 @@ export default function ConcreteCalculatorPage() {
     volumeCubicFeet: number;
     volumeCubicYards: number;
     volumeCubicMeters: number;
-    bags: number;
-    cement: number;
-    sand: number;
-    gravel: number;
+    weightPounds: number;
+    weightKg: number;
+    bags60lb: number;
+    bags80lb: number;
   } | null>(null)
 
   const calculateConcrete = (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,12 +67,21 @@ export default function ConcreteCalculatorPage() {
       const volumeCubicYards = volumeCubicFeet / 27
       const volumeCubicMeters = volumeCubicFeet / 35.3147
 
-      const bags = Math.ceil(volumeCubicYards * 40)
-      const cement = volumeCubicYards * 4.5
-      const sand = volumeCubicYards * 10
-      const gravel = volumeCubicYards * 12
+      const weightPounds = volumeCubicFeet * 133 // 133 lbs/ft3 is the density of concrete
+      const weightKg = weightPounds * 0.453592 // Convert pounds to kg
 
-      setResult({ volumeCubicFeet, volumeCubicYards, volumeCubicMeters, bags, cement, sand, gravel })
+      const bags60lb = Math.ceil(weightPounds / 60)
+      const bags80lb = Math.ceil(weightPounds / 80)
+
+      setResult({
+        volumeCubicFeet,
+        volumeCubicYards,
+        volumeCubicMeters,
+        weightPounds,
+        weightKg,
+        bags60lb,
+        bags80lb
+      })
     } catch (error) {
       console.error('Error in calculation:', error)
       setResult(null)
@@ -114,10 +123,10 @@ export default function ConcreteCalculatorPage() {
                 { label: 'Volume (cubic feet)', value: `${result.volumeCubicFeet.toFixed(2)}` },
                 { label: 'Volume (cubic yards)', value: `${result.volumeCubicYards.toFixed(2)}` },
                 { label: 'Volume (cubic meters)', value: `${result.volumeCubicMeters.toFixed(2)}` },
-                { label: 'Bags of Concrete', value: `${result.bags} (80lb bags)` },
-                { label: 'Cement', value: `${result.cement.toFixed(2)} cubic feet` },
-                { label: 'Sand', value: `${result.sand.toFixed(2)} cubic feet` },
-                { label: 'Gravel', value: `${result.gravel.toFixed(2)} cubic feet` },
+                { label: 'Weight (lbs)', value: `${result.weightPounds.toFixed(2)}` },
+                { label: 'Weight (kg)', value: `${result.weightKg.toFixed(2)}` },
+                { label: 'Bags of Concrete (60lb)', value: `${result.bags60lb}` },
+                { label: 'Bags of Concrete (80lb)', value: `${result.bags80lb}` },
               ]}
             />
           )
@@ -319,10 +328,10 @@ export default function ConcreteCalculatorPage() {
                 <p className="text-lg"><strong>Volume:</strong> {result.volumeCubicFeet.toFixed(2)} cubic feet</p>
                 <p className="text-lg">or {result.volumeCubicYards.toFixed(2)} cubic yards</p>
                 <p className="text-lg">or {result.volumeCubicMeters.toFixed(2)} cubic meters</p>
-                <p className="text-lg"><strong>Bags of Concrete:</strong> {result.bags} (80lb bags)</p>
-                <p className="text-lg"><strong>Cement:</strong> {result.cement.toFixed(2)} cubic feet</p>
-                <p className="text-lg"><strong>Sand:</strong> {result.sand.toFixed(2)} cubic feet</p>
-                <p className="text-lg"><strong>Gravel:</strong> {result.gravel.toFixed(2)} cubic feet</p>
+                <p className="text-lg"><strong>Weight (pre-mixed concrete):</strong></p>
+                <p className="text-lg">{result.weightPounds.toFixed(2)} lbs or {result.weightKg.toFixed(2)} kg</p>
+                <p className="text-lg"><strong>Bags of Concrete:</strong></p>
+                <p className="text-lg">{result.bags60lb} (60lb bags) or {result.bags80lb} (80lb bags)</p>
               </div>
               <button
                 onClick={handlePrint}
