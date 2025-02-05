@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-const imageCount = 5 // Update this based on the actual number of images
-const videoCount = 2 // Update this based on the actual number of videos
+const imageCount = 6 // Updated to include the new image
+const videoCount = 4 // Updated to include the new videos
 
 const MediaPage = () => {
   const [selectedMedia, setSelectedMedia] = useState<string | null>(null)
@@ -20,8 +20,15 @@ const MediaPage = () => {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  const images = Array.from({ length: imageCount }, (_, i) => `/images/our-work-${i + 1}.jpg`)
-  const videos = Array.from({ length: videoCount }, (_, i) => `/videos/our-work-${i + 1}.mp4`)
+  const images = [
+    ...Array.from({ length: imageCount - 1 }, (_, i) => `/images/our-work-${i + 1}.jpg`),
+    '/images/2-4-2.jpg'
+  ]
+  const videos = [
+    ...Array.from({ length: videoCount - 2 }, (_, i) => `/videos/our-work-${i + 1}.mp4`),
+    '/videos/2-4-1.mp4',
+    '/videos/2-4-3.mp4'
+  ]
 
   return (
     <main className="bg-gradient-to-br from-gray-900 to-black text-white min-h-screen py-24">
@@ -38,7 +45,12 @@ const MediaPage = () => {
                 className="relative aspect-square cursor-pointer overflow-hidden rounded-lg"
                 onClick={() => setSelectedMedia(src)}
               >
-                <Image src={src} alt={`Our work ${index + 1}`} fill className="object-cover" />
+                <Image
+                  src={src}
+                  alt={src.includes('2-4-2') ? 'New project showcase' : `Our work ${index + 1}`}
+                  fill
+                  className="object-cover"
+                />
               </motion.div>
             ))}
           </div>
@@ -53,7 +65,7 @@ const MediaPage = () => {
                   src={src}
                   controls
                   className="w-full h-full object-cover"
-                  poster={`/images/our-work-${index + 1}.jpg`}
+                  poster={src.includes('2-4') ? `/images/2-4-2.jpg` : `/images/our-work-${index + 1}.jpg`}
                 >
                   Your browser does not support the video tag.
                 </video>
